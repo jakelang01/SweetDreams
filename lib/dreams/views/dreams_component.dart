@@ -242,15 +242,17 @@ class _HomePageState extends State<HomePage> implements UNITSView {
     );
   }
 
-  RaisedButton calculateButton() {
-    return RaisedButton(
+  ElevatedButton calculateButton() {
+    return ElevatedButton(
       onPressed: _calculator,
-      color: Colors.blueAccent.shade700,
+      style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blueAccent.shade700,
+          textStyle: TextStyle(color: Colors.white70)
+      ),
       child: Text(
         'Calculate',
         style: TextStyle(fontSize: 16.9),
       ),
-      textColor: Colors.white70,
     );
   }
 
