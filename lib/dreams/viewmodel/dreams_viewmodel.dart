@@ -8,6 +8,9 @@ class UNITSViewModel {
   String _timeType = "";
   String _message = "";
 
+  String healthySleepAgeRange = "18 to 60 Years Old";
+  String healthySleepAmountPerNight = "7 or more hours per night.";
+
   double hour = 0.0;
   double minute = 0.0;
   double sleepHour = 0.0;
