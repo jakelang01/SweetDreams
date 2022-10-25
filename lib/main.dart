@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dreams/views/dreams_component.dart';
 import 'dreams/presenter/dreams_presenter.dart';
+import 'dreams/views/dreams_input.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,18 @@ class MyApp extends StatelessWidget {
                       return SplashScreen();
                     }));
                   },
-                )
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blueAccent
+                  ),
+                  child: Text('Add Sleep Data'),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                      return InputScreen();
+                    }));
+                  },
+                ),
               ],
             )
           ),
@@ -53,5 +65,17 @@ class _SplashScreen extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return new HomePage(new BasicPresenter(), title: 'Sweet Dreams', key: Key("UNITS"),);
+  }
+}
+
+class InputScreen extends StatefulWidget {
+  @override
+  _InputScreen createState() => _InputScreen();
+}
+
+class _InputScreen extends State<InputScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return new SleepInput(title: 'Sweet Dreams', key: Key("INPUT"),);
   }
 }
