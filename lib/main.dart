@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'dreams/views/dreams_component.dart';
 import 'dreams/presenter/dreams_presenter.dart';
 import 'dreams/views/dreams_input.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,5 +92,36 @@ class _InputScreen extends State<InputScreen> {
   @override
   Widget build(BuildContext context) {
     return new SleepInput(title: 'Sweet Dreams', key: Key("INPUT"),);
+  }
+}
+
+class TextEntryBox extends StatelessWidget {
+  const TextEntryBox({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'How was your sleep?',
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextFormField(
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Tell us about your sleep here',
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
