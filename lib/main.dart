@@ -13,46 +13,59 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Builder(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: Text("Sweet Dreams"),
-          ),
-          body: Center(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                  child: Text("Sweet Dreams!",style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent), textScaleFactor: 3,)
-                  ,),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.blueAccent
-                  ),
-                  child: Text('Begin'),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return SplashScreen();
-                    }));
-                  },
+    return FutureBuilder(
+      // Initialize FlutterFire
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot) {
+        // check for errors
+        if (snapshot.hasError) {
+          print("couldn't connect");
+        }
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MaterialApp(
+            home: Builder(
+              builder: (context) => Scaffold(
+                appBar: AppBar(
+                  title: Text("Sweet Dreams"),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.blueAccent
-                  ),
-                  child: Text('Add Sleep Data'),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                      return InputScreen();
-                    }));
-                  },
+                body: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                        child: Text("Sweet Dreams!",style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent), textScaleFactor: 3,)
+                        ,),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.blueAccent
+                        ),
+                        child: Text('Begin'),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                            return SplashScreen();
+                          }));
+                        },
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.blueAccent
+                        ),
+                        child: Text('Add Sleep Data'),
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                            return InputScreen();
+                          }));
+                        },
+                      ),
+                    ],
+                  )
                 ),
-              ],
+              )
             )
-          ),
-        )
-      )
+          );
+        }
+      }
     );
   }
 }
