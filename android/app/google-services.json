@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "473600943679",
+    "firebase_url": "https://sweetdreams-7db88-default-rtdb.firebaseio.com",
+    "project_id": "sweetdreams-7db88",
+    "storage_bucket": "sweetdreams-7db88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473600943679:android:aa35981099bb92cd02ba8a",
+        "android_client_info": {
+          "package_name": "com.example.units"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473600943679-rghnetbsvt9jk6uuquj49c8fsab97egr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.units",
+            "certificate_hash": "89eb311f7420873da652358c5aa0106c9ddf7bd5"
+          }
+        },
+        {
+          "client_id": "473600943679-vvrvgmd23k054pq7bagkidfqtksn5pgs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSFnuABqKQAoWP86170XnQBRIk2yjiOdA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473600943679-vvrvgmd23k054pq7bagkidfqtksn5pgs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

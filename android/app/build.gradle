@@ -22,8 +22,8 @@ if (flutterVersionName == null) {
 }
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:30.1.0')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:31.0.2.')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20"
     implementation 'com.android.support:mulitdex:1.0.3'
 }
 
