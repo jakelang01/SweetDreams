@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../utils/dreams_constant.dart';
 
 class UNITSViewModel {
@@ -7,6 +9,12 @@ class UNITSViewModel {
 
   String _timeType = "";
   String _message = "";
+
+//database reference for collection Sleep Hours
+  final databaseReference = FirebaseFirestore.instance.collection('Sleep Hours');
+  final String createText = "Create new day";
+  final String getText = "Get Day";
+  final String removeText = "Remove Day";
 
   String healthySleepAgeRange = "18 to 60 Years Old";
   String healthySleepAmountPerNight = "7 or more hours per night.";

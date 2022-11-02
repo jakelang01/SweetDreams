@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../views/dreams_view.dart';
 import '../viewmodel/dreams_viewmodel.dart';
 import '../utils/dreams_constant.dart';
@@ -172,5 +174,25 @@ class BasicPresenter implements UNITSPresenter{
     } catch (e){
 
     }
+  }
+}
+abstract class RecordNewDay implements UNITSViewModel{
+
+  void createDay(int count, String bedtime, int quality, String wakeUp){
+  databaseReference.doc("Day " + count.toString()).set({"Bedtime": bedtime, "Quality of Sleep (1-5)": quality,
+      "Total Sleep": "need to calculate total", "Wake-Up Time": wakeUp});
+  }
+
+  Future<void> getDay(String day) async {
+    DocumentSnapshot data = await retrieveData(day);
+    print(data.data().toString());
+  }
+
+  Future<DocumentSnapshot> retrieveData(String day) async{
+    return databaseReference.doc("Day " + day).get();
+  }
+
+  void removeDay(String day){
+    databaseReference.doc("Day " + day).delete();
   }
 }
