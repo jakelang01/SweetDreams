@@ -68,6 +68,18 @@ class _SplashScreen extends State<SplashScreen> {
   }
 }
 
+class GoodHabitsScreen extends StatefulWidget {
+  @override
+  _GoodHabitsScreen createState() => _GoodHabitsScreen();
+}
+
+class _GoodHabitsScreen extends State<GoodHabitsScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return new HomePage(new BasicPresenter(), title: 'Good Sleeping Habits', key: Key(""),);
+  }
+}
+
 class InputScreen extends StatefulWidget {
   @override
   _InputScreen createState() => _InputScreen();
