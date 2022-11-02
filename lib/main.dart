@@ -25,49 +25,60 @@ class MyApp extends StatelessWidget {
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
-            home: Builder(
-              builder: (context) => Scaffold(
-                appBar: AppBar(
-                  title: Text("Sweet Dreams"),
-                ),
-                body: Center(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                        child: Text("Sweet Dreams!",style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent), textScaleFactor: 3,)
-                        ,),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.blueAccent
+              home: Builder(
+                  builder: (context) =>
+                      Scaffold(
+                        appBar: AppBar(
+                          title: Text("Sweet Dreams"),
                         ),
-                        child: Text('Begin'),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                            return SplashScreen();
-                          }));
-                        },
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.blueAccent
+                        body: Center(
+                            child: Column(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(top: 20.0,
+                                      bottom: 20.0),
+                                  child: Text("Sweet Dreams!",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blueAccent),
+                                    textScaleFactor: 3,)
+                                  ,),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.blueAccent
+                                  ),
+                                  child: Text('Begin'),
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) {
+                                              return SplashScreen();
+                                            }));
+                                  },
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.blueAccent
+                                  ),
+                                  child: Text('Add Sleep Data'),
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) {
+                                              return InputScreen();
+                                            }));
+                                  },
+                                ),
+                              ],
+                            )
                         ),
-                        child: Text('Add Sleep Data'),
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                            return InputScreen();
-                          }));
-                        },
-                      ),
-                    ],
-                  )
-                ),
+                      )
               )
-            )
           );
         }
-      }
-    );
+      Widget loading = MaterialApp();
+      return loading;
+  });
   }
 }
 
@@ -96,7 +107,6 @@ class _InputScreen extends State<InputScreen> {
 }
 
 class TextEntryBox extends StatelessWidget {
-  const TextEntryBox({super.key});
 
   @override
   Widget build(BuildContext context) {
