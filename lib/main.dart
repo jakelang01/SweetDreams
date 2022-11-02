@@ -125,3 +125,30 @@ class TextEntryBox extends StatelessWidget {
     );
   }
 }
+
+class RatingBar extends StatelessWidget{
+  const RatingBar({super.key});
+
+  Widget _ratingBar(){
+    return RatingBar.builder(
+      initialRating: 3,
+      minRating: 1,
+      direction: _isVertical ? Axis.vertical : Axis.horizontal,
+      allowHalfRating: false,
+      unratedColor: Colors.amber.withAlpha(50),
+      itemCount: 5,
+      itemSize: 50.0,
+      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+      itemBuilder: (context, _) => Icon(
+        _selectedIcon ?? Icons.star,
+        color: Colors.amber,
+      ),
+      onRatingUpdate: (rating){
+        setState((){
+          _rating = rating;
+        });
+      },
+      updateOnDrag: true,
+    );
+  }
+}
