@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'dreams/views/dreams_component.dart';
 import 'dreams/presenter/dreams_presenter.dart';
 import 'dreams/views/dreams_input.dart';
+import 'dreams/views/dreams_healthy_habits.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 void main() {
@@ -69,6 +70,19 @@ class MyApp extends StatelessWidget {
                                             }));
                                   },
                                 ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.blueAccent
+                                  ),
+                                  child: Text('Healthy Sleep Habits'),
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) {
+                                              return HealthyHabitsScreen();
+                                            }));
+                                  },
+                                ),
                               ],
                             )
                         ),
@@ -118,6 +132,18 @@ class _InputScreen extends State<InputScreen> {
   }
 }
 
+class HealthyHabitsScreen extends StatefulWidget {
+  @override
+  _HealthyHabitsScreen createState() => _HealthyHabitsScreen();
+}
+
+class _HealthyHabitsScreen extends State<HealthyHabitsScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return new HealthyHabits(title: 'Sweet Dreams', key: Key("Healthy Habits"),);
+  }
+}
+
 class TextEntryBox extends StatelessWidget {
 
   @override
@@ -148,8 +174,10 @@ class TextEntryBox extends StatelessWidget {
   }
 }
 
+/*
 class RatingBar extends StatelessWidget{
   const RatingBar({super.key});
+
 
   Widget _ratingBar(){
     return RatingBar.builder(
@@ -174,3 +202,4 @@ class RatingBar extends StatelessWidget{
     );
   }
 }
+*/
