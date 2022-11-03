@@ -176,7 +176,7 @@ class BasicPresenter implements UNITSPresenter{
     }
   }
 }
-abstract class RecordNewDay implements UNITSViewModel{
+class RecordNewDay implements UNITSViewModel{
 
   void createDay(int count, String bedtime, int quality, String wakeUp){
   databaseReference.doc("Day " + count.toString()).set({"Bedtime": bedtime, "Quality of Sleep (1-5)": quality,
@@ -192,7 +192,10 @@ abstract class RecordNewDay implements UNITSViewModel{
     return databaseReference.doc("Day " + day).get();
   }
 
-  void removeDay(String day){
-    databaseReference.doc("Day " + day).delete();
+  void removeDay(int day){
+    databaseReference.doc("Day " + day.toString()).delete();
   }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
