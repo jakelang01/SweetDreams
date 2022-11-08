@@ -156,36 +156,6 @@ class _HealthyHabitsScreen extends State<HealthyHabitsScreen> {
   }
 }
 
-class TextEntryBox extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'How was your sleep?',
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextFormField(
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Tell us about your sleep here',
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 /*
 class RatingBar extends StatelessWidget{
   const RatingBar({super.key});
