@@ -177,10 +177,10 @@ class BasicPresenter implements UNITSPresenter{
   }
 }
 class RecordNewDay implements UNITSViewModel{
-
+//total sleep might need to be formatted differently
   void createDay(int count, String bedtime, int quality, String wakeUp){
   databaseReference.doc("Day " + count.toString()).set({"Bedtime": bedtime, "Quality of Sleep (1-5)": quality,
-      "Total Sleep": "need to calculate total", "Wake-Up Time": wakeUp});
+      "Total Sleep": calculateSleep(bedtime, wakeUp).toString(), "Wake-Up Time": wakeUp});
   }
 
   Future<void> getDay(String day) async {
@@ -198,4 +198,24 @@ class RecordNewDay implements UNITSViewModel{
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
+//takes in bedtime and wakeup time and calculates total amount of sleep
+double calculateSleep(String bed, String wake){
+  List bedSplit = bed.split(":");
+  double bedHour = double.parse(bedSplit[0]);
+  double bedMinute = double.parse(bedSplit[1])/60;
+  List wakeSplit = wake.split(":");
+  double wakeHour = double.parse(wakeSplit[0]);
+  double wakeMinute = double.parse(wakeSplit[1])/60;
+
+  double bedtime = bedHour + bedMinute;
+  double wakeup = wakeHour + wakeMinute;
+  if(bedtime <= 12){
+    double total = 12-bedtime+wakeup;
+    return total;
+    }else{
+      double total = wakeup-bedtime;
+      return total;
+    }
 }
