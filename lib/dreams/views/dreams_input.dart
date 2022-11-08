@@ -14,7 +14,7 @@ class SleepInput extends StatefulWidget {
 }
 
 class _SleepInputPageState extends State<SleepInput> {
-  //temp count-starting at because of sample at day 1
+  //temp count-starting at because of sample is day 1
   int count = 2;
   RecordNewDay day = new RecordNewDay();
   @override
