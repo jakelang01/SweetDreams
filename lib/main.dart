@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'dreams/views/dreams_component.dart';
 import 'dreams/presenter/dreams_presenter.dart';
 import 'dreams/views/dreams_input.dart';
+import 'dreams/views/dreams_healthy_habits.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 void main() {
@@ -69,6 +70,19 @@ class MyApp extends StatelessWidget {
                                             }));
                                   },
                                 ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.blueAccent
+                                  ),
+                                  child: Text('Healthy Sleep Habits'),
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) {
+                                              return HealthyHabitsScreen();
+                                            }));
+                                  },
+                                ),
                               ],
                             )
                         ),
@@ -79,23 +93,6 @@ class MyApp extends StatelessWidget {
       Widget loading = MaterialApp();
       return loading;
   });
-  }
-  late final _ratingController;
-  late double _rating;
-
-  double _userRating = 3.0;
-  int _ratingBarMode = 1;
-  double _initialRating = 2.0;
-  bool _isRTLMode = false;
-  bool _isVertical = false;
-
-  IconData? _selectedIcon;
-
-  @override
-  void initState() {
-    initState();
-    _ratingController = TextEditingController(text: '3.0');
-    _rating = _initialRating;
   }
 }
 
@@ -112,40 +109,27 @@ class _SplashScreen extends State<SplashScreen> {
 }
 
 class InputScreen extends StatefulWidget {
-    @override
+  @override
   _InputScreen createState() => _InputScreen();
 }
 
 class _InputScreen extends State<InputScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     //crossAxisAlignment: CrossAxisAlignment.start,
-      body: Column(
-      children: <Widget>[
-        const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "How was your sleep?",
-              ),
-            )
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextFormField(
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Tell us about your sleep here',
-            ),
-          ),
-        ),
-      ],
-      ),
-    );
+    return new SleepInput(title: 'Sweet Dreams', key: Key("INPUT"),);
   }
-  //return new SleepInput(title: 'Sweet Dreams', key: Key("INPUT"),);
+}
+
+class HealthyHabitsScreen extends StatefulWidget {
+  @override
+  _HealthyHabitsScreen createState() => _HealthyHabitsScreen();
+}
+
+class _HealthyHabitsScreen extends State<HealthyHabitsScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return new HealthyHabits(title: 'Sweet Dreams', key: Key("Healthy Habits"),);
+  }
 }
 
 class TextEntryBox extends StatelessWidget {
@@ -177,16 +161,12 @@ class TextEntryBox extends StatelessWidget {
     );
   }
 }
-/*
-class RatingBar extends StatefulWidget {
-  @override
-  _RatingBar createState() => _RatingBar();
-}
 
-class _RatingBar extends State<RatingBar>{
-  //const RatingBar({super.key});
-  
-  @override
+/*
+class RatingBar extends StatelessWidget{
+  const RatingBar({super.key});
+
+
   Widget _ratingBar(){
     return RatingBar.builder(
       initialRating: 3,
@@ -209,10 +189,5 @@ class _RatingBar extends State<RatingBar>{
       updateOnDrag: true,
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-}*/
+}
+*/
