@@ -120,12 +120,13 @@ class _InputScreen extends State<InputScreen> {
       body: Column(
       children: <Widget>[
         const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "How was your sleep?",
-              ),
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 64),
+            child: Text(
+              'How was your sleep?',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              textScaleFactor: 2,
+              style: const TextStyle(fontWeight: FontWeight.bold),
             )
         ),
         Padding(
@@ -136,6 +137,16 @@ class _InputScreen extends State<InputScreen> {
               labelText: 'Tell us about your sleep here',
             ),
           ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: Text(
+            'Rate your sleep 1-5 Stars',
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            textScaleFactor: 1.8,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          )
         ),
       ],
     ),
