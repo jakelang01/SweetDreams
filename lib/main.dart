@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
                                   style: ElevatedButton.styleFrom(
                                       primary: Colors.blueAccent
                                   ),
-                                  child: Text('Begin'),
+                                  child: Text('Sleep Calculator'),
                                   onPressed: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
