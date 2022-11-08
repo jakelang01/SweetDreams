@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../views/dreams_view.dart';
@@ -19,6 +20,28 @@ class _SleepInputPageState extends State<SleepInput> {
   @override
   void initState() {
     super.initState();
+  }
+
+  final databaseReference = FirebaseFirestore.instance.collection('User 1');
+  final String addNightButton = "Add Night";
+  int nights = 1; // incrementer for nightly data
+
+  void addNight(String bedtime, String wakeUp, double sleepHours, int rating) {
+    databaseReference.doc("Night" + nights.toString()).set({"Bedtime": bedtime, "Wake Up": wakeUp, "Hours Slept": sleepHours, "Rating": rating});
+    nights++; // increments night for next call
+  }
+
+  Future<void> getNightData() async { // need to add user choosing which night's data
+    DocumentSnapshot data = await retrieveData();
+    print(data.data().toString());
+  }
+
+  Future<DocumentSnapshot> retrieveData() async {
+    return databaseReference.doc(nights.toString()).get();
+  }
+
+  void removeNight() { // need to add user choosing a specific night to delete
+    databaseReference.doc(nights.toString()).delete();
   }
 
   //everytime function called firebase document "day" will increment by 1
