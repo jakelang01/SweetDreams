@@ -116,9 +116,33 @@ class InputScreen extends StatefulWidget {
 class _InputScreen extends State<InputScreen> {
   @override
   Widget build(BuildContext context) {
-    return new SleepInput(title: 'Sweet Dreams', key: Key("INPUT"),);
+    return Scaffold(
+      body: Column(
+      children: <Widget>[
+        const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "How was your sleep?",
+              ),
+            )
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          child: TextFormField(
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Tell us about your sleep here',
+            ),
+          ),
+        ),
+      ],
+    ),
+    );
   }
 }
+
 
 class HealthyHabitsScreen extends StatefulWidget {
   @override
