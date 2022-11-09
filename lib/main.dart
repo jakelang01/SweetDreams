@@ -161,53 +161,6 @@ class _SplashScreen extends State<SplashScreen> {
   }
 }
 
-class InputScreen extends StatefulWidget {
-  @override
-  _InputScreen createState() => _InputScreen();
-}
-
-class _InputScreen extends State<InputScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-      children: <Widget>[
-        const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 64),
-            child: Text(
-              'How was your sleep?',
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              textScaleFactor: 2,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            )
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextFormField(
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Tell us about your sleep here',
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: Text(
-            'Rate your sleep 1-5 Stars',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            textScaleFactor: 1.8,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          )
-        ),
-      ],
-    ),
-    );
-  }
-}
-
-
 class HealthyHabitsScreen extends StatefulWidget {
   @override
   _HealthyHabitsScreen createState() => _HealthyHabitsScreen();
@@ -220,32 +173,3 @@ class _HealthyHabitsScreen extends State<HealthyHabitsScreen> {
   }
 }
 
-/*
-class RatingBar extends StatelessWidget{
-  const RatingBar({super.key});
-
-
-  Widget _ratingBar(){
-    return RatingBar.builder(
-      initialRating: 3,
-      minRating: 1,
-      direction: _isVertical ? Axis.vertical : Axis.horizontal,
-      allowHalfRating: false,
-      unratedColor: Colors.amber.withAlpha(50),
-      itemCount: 5,
-      itemSize: 50.0,
-      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-      itemBuilder: (context, _) => Icon(
-        _selectedIcon ?? Icons.star,
-        color: Colors.amber,
-      ),
-      onRatingUpdate: (rating){
-        setState((){
-          _rating = rating;
-        });
-      },
-      updateOnDrag: true,
-    );
-  }
-}
-*/
