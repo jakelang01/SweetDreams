@@ -176,24 +176,24 @@ class BasicPresenter implements UNITSPresenter{
     }
   }
 }
-class RecordNewDay implements UNITSViewModel{
+class RecordNewNight implements UNITSViewModel{
 //total sleep might need to be formatted differently
-  void createDay(int count, String bedtime, int quality, String wakeUp){
-  databaseReference.doc("Day " + count.toString()).set({"Bedtime": bedtime, "Quality of Sleep (1-5)": quality,
+  void createNight(int count, String bedtime, int quality, String wakeUp){
+  databaseReference.doc("Night " + count.toString()).set({"Bedtime": bedtime, "Quality of Sleep (1-5)": quality,
       "Total Sleep": calculateSleep(bedtime, wakeUp).toString(), "Wake-Up Time": wakeUp});
   }
 
-  Future<void> getDay(String day) async {
+  Future<void> getNight(String day) async {
     DocumentSnapshot data = await retrieveData(day);
     print(data.data().toString());
   }
 
   Future<DocumentSnapshot> retrieveData(String day) async{
-    return databaseReference.doc("Day " + day).get();
+    return databaseReference.doc("Night " + day).get();
   }
 
-  void removeDay(int day){
-    databaseReference.doc("Day " + day.toString()).delete();
+  void removeNight(int day){
+    databaseReference.doc("Night " + day.toString()).delete();
   }
 
   @override
