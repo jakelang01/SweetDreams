@@ -31,9 +31,21 @@ class _HealthyHabitsPageState extends State<HealthyHabits> {
         backgroundColor: Colors.white,
         body: ListView(
           children: <Widget>[
-            Padding(padding: EdgeInsets.all(5.0)),
-            Text("zzz"),
-            Padding(padding: EdgeInsets.all(5.0)),
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: const Color(0xFF000000),
+                    width: 2
+                  ),
+                ),
+              ),
+                child: Text(
+                  "healthy habits go here - this can be a scalable and scrollable list",
+                  textAlign: TextAlign.center,
+                  textScaleFactor: 1.75,
+                ),
+            ),
           ],
         )
     );
