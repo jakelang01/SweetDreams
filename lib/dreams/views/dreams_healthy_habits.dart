@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../views/dreams_view.dart';
 import '../presenter/dreams_presenter.dart';
+import'./dreams_videos.dart';
 
 class HealthyHabits extends StatefulWidget {
 
@@ -46,6 +47,19 @@ class _HealthyHabitsPageState extends State<HealthyHabits> {
                   textScaleFactor: 1.75,
                 ),
             ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.blueAccent
+              ),
+              child: Text('Video Resources'),
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return VideosScreen();
+                        }));
+              },
+            ),
           ],
         )
     );
@@ -54,5 +68,17 @@ class _HealthyHabitsPageState extends State<HealthyHabits> {
   _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
+  }
+}
+
+class VideosScreen extends StatefulWidget {
+  @override
+  _VideosScreen createState() => _VideosScreen();
+}
+
+class _VideosScreen extends State<VideosScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return new SleepVideosPage(title: 'Sweet Dreams', key: Key("VIDEOS"),);
   }
 }

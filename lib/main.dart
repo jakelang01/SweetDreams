@@ -6,6 +6,7 @@ import 'dreams/presenter/dreams_presenter.dart';
 import 'dreams/views/dreams_input.dart';
 import 'dreams/views/dreams_healthy_habits.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'dreams/views/dreams_output.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,14 +27,6 @@ class _MyHomePageState extends State<MyHomePage> {
   String dailyMessage = "";
   final messageDB = FirebaseFirestore.instance.collection('Messages');
 
-  Future<void> getMOTD() async {
-    DocumentSnapshot data =  await messageDB.doc("MOTD").get();
-    String unformatted = data.data().toString();
-    setState(() {
-      dailyMessage = unformatted.substring(9,unformatted.length - 1);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     if (dailyMessage == "") getMOTD();
@@ -45,19 +38,28 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: <Widget>[
               Text("Sweet Dreams!",
-                style: Theme.of(context).textTheme.headline1,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headline1,
                 textAlign: TextAlign.center,
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 15.0),
               ),
               Text("Message of the Day:",
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headline2,
                 textAlign: TextAlign.center,
               ),
               Text(dailyMessage,
-                  style: Theme.of(context).textTheme.bodyText2,
-                  textAlign: TextAlign.center,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .bodyText2,
+                textAlign: TextAlign.center,
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 15.0),
@@ -73,7 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                child: Text('Add Sleep Data'),
+                child: Text('Last Night\'s Sleep'),
+                // better way to phrase this?
                 onPressed: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -93,14 +96,34 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                child: Text('test'),
+                child: Text('motd test'),
                 onPressed: getMOTD,
+              ),
+              ElevatedButton(
+                child: Text('See Previous Night\'s Sleep'),
+                // better way to phrase this?
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return OutputScreen();
+                          }));
+                },
               ),
             ],
           )
       ),
     );
-  }}
+  }
+
+  Future<void> getMOTD() async {
+    DocumentSnapshot data = await messageDB.doc("MOTD").get();
+    String unformatted = data.data().toString();
+    setState(() {
+      dailyMessage = unformatted.substring(9, unformatted.length - 1);
+    });
+  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
