@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: ElevatedButton.styleFrom(
                     primary: Colors.blueAccent
                 ),
-                child: Text('Add Sleep Data'),
+                child: Text('Last Night\'s Sleep'), // better way to phrase this?
                 onPressed: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -110,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: ElevatedButton.styleFrom(
                     primary: Colors.blueAccent
                 ),
-                child: Text('test'),
+                child: Text('motd test'),
                 onPressed: getMOTD,
               ),
             ],
