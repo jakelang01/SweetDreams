@@ -7,62 +7,6 @@ import '../presenter/dreams_presenter.dart';
 import 'package:intl/intl.dart';
 
 
-class SleepInput extends StatefulWidget {
-
-  SleepInput({required Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _SleepInputPageState createState() => _SleepInputPageState();
-}
-
-class _SleepInputPageState extends State<SleepInput> {
-  int count = 1;
-  RecordNewNight night = new RecordNewNight();
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  //everytime function called firebase document "day" will increment by 1
-  //createDay is in presenter and adds data to the collection "Sleep Hours"
-  //need a button on this page so that this function can listen
-  void handleNewDay(String bedtime, int quality, String wakeUp){
-    night.createNight(count, bedtime, quality, wakeUp);
-    count++;
-  }
-
-  //removes specific day from collection specific day number as parameter
-  void deleteDay(int collectionDay){
-    night.removeNight(collectionDay);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Add Last Night\'s Sleep Data'),
-          centerTitle: true,
-          backgroundColor: Colors.blueAccent.shade700,
-        ),
-        backgroundColor: Colors.white,
-        body: ListView(
-          children: <Widget>[
-            Padding(padding: EdgeInsets.all(5.0)),
-            Text("Do stuff here"),
-            Padding(padding: EdgeInsets.all(5.0)),
-          ],
-        )
-    );
-  }
-
-  _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);
-  }
-}
-
 class InputScreen extends StatefulWidget {
   @override
   _InputScreen createState() => _InputScreen();
@@ -82,9 +26,22 @@ class _InputScreen extends State<InputScreen> {
   bool _isVertical = false;
   IconData? _selectedIcon;
 
-  //timeinput
+  //text controllers
+  TextEditingController userDescription = TextEditingController();
   TextEditingController wentToSleep = TextEditingController();
   TextEditingController wokeUp = TextEditingController();
+
+  //for handleNewDay
+  int count = 1;
+  RecordNewNight night = new RecordNewNight();
+
+  //everytime function called firebase document "day" will increment by 1
+  //createDay is in presenter and adds data to the collection "Sleep Hours"
+  //need a button on this page so that this function can listen
+  void handleNewDay(String bedtime, int quality, String wakeUp, String description){
+    night.createNight(count, bedtime, quality, wakeUp, description);
+    count++;
+  }
 
   @override
   void initState() {
@@ -119,9 +76,12 @@ class _InputScreen extends State<InputScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
             child: TextFormField(
+              controller: userDescription,
               decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
+                border: OutlineInputBorder(),
                 labelText: 'Tell us about your sleep here',
+                //minLines: 1,
+                //maxLines: null,
               ),
             ),
           ),
@@ -224,6 +184,22 @@ class _InputScreen extends State<InputScreen> {
                   }
                 },
               )
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child:ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.blueAccent
+              ),
+              child: Text('Submit'),
+              onPressed: () {
+                handleNewDay(wentToSleep.text, _userRating.toInt(), wokeUp.text, userDescription.text);
+                wentToSleep.dispose();
+                wokeUp.dispose();
+                userDescription.dispose();
+                Navigator.of(context).pop(false);
+              },
+            )
           )
         ],
       ),
@@ -250,7 +226,49 @@ class _InputScreen extends State<InputScreen> {
         });
       },
       updateOnDrag: true,
-      );
+    );
+  }
+}
+
+/*
+class SleepInput extends StatefulWidget {
+
+  SleepInput({required Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _SleepInputPageState createState() => _SleepInputPageState();
+}
+
+class _SleepInputPageState extends State<SleepInput> {
+  //removes specific day from collection specific day number as parameter
+  void deleteDay(int collectionDay){
+    night.removeNight(collectionDay);
   }
 
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Add Last Night\'s Sleep Data'),
+          centerTitle: true,
+          backgroundColor: Colors.blueAccent.shade700,
+        ),
+        backgroundColor: Colors.white,
+        body: ListView(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.all(5.0)),
+            Text("Do stuff here"),
+            Padding(padding: EdgeInsets.all(5.0)),
+          ],
+        )
+    );
+  }
+
+  _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
 }
+*/

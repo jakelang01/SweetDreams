@@ -178,9 +178,9 @@ class BasicPresenter implements UNITSPresenter{
 }
 class RecordNewNight implements UNITSViewModel{
 //total sleep might need to be formatted differently
-  void createNight(int count, String bedtime, int quality, String wakeUp){
+  void createNight(int count, String bedtime, int quality, String wakeUp, String description){
   databaseReference.doc("Night " + count.toString()).set({"Bedtime": bedtime, "Quality of Sleep (1-5)": quality,
-      "Total Sleep": calculateSleep(bedtime, wakeUp).toString(), "Wake-Up Time": wakeUp});
+      "Total Sleep": calculateSleep(bedtime, wakeUp).toString(), "Wake-Up Time": wakeUp, "Description": description});
   }
 
   Future<void> getNight(String day) async {
