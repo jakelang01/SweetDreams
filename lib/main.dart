@@ -44,33 +44,25 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
           child: Column(
             children: <Widget>[
+              Text("Sweet Dreams!",
+                style: Theme.of(context).textTheme.headline1,
+                textAlign: TextAlign.center,
+              ),
               Padding(
-                padding: EdgeInsets.only(top: 20.0,
-                    bottom: 20.0),
-                child: Text("Sweet Dreams!",
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent),
-                  textScaleFactor: 3,)
-                ,),
+                padding: EdgeInsets.only(bottom: 15.0),
+              ),
               Text("Message of the Day:",
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-                textScaleFactor: 1.7,),
+                style: Theme.of(context).textTheme.headline2,
+                textAlign: TextAlign.center,
+              ),
+              Text(dailyMessage,
+                  style: Theme.of(context).textTheme.bodyText2,
+                  textAlign: TextAlign.center,
+              ),
               Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text(dailyMessage,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.italic,
-                      color: Colors.blueGrey),
-                  textScaleFactor: 1.3,)
-                ,),
+                padding: EdgeInsets.only(bottom: 15.0),
+              ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent
-                ),
                 child: Text('Sleep Calculator'),
                 onPressed: () {
                   Navigator.of(context).push(
@@ -81,9 +73,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent
-                ),
                 child: Text('Add Sleep Data'),
                 onPressed: () {
                   Navigator.of(context).push(
@@ -94,9 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent
-                ),
                 child: Text('Healthy Sleep Habits'),
                 onPressed: () {
                   Navigator.of(context).push(
@@ -107,9 +93,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent
-                ),
                 child: Text('test'),
                 onPressed: getMOTD,
               ),
@@ -134,10 +117,30 @@ class MyApp extends StatelessWidget {
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return MaterialApp(
-              title: 'Flutter Demo',
+              title: 'Sweet Dreams',
               theme: ThemeData(
+                colorScheme: ColorScheme.fromSwatch(
+                    primarySwatch: Colors.deepPurple
+                ),
 
-                primarySwatch: Colors.blue,
+                fontFamily: 'Roboto',
+                textTheme: const TextTheme(
+                  headline1: TextStyle(
+                    fontSize: 48.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  headline2: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  bodyText2: TextStyle(
+                    fontSize: 18.0,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.black45,
+                  ),
+                ),
               ),
               home: const MyHomePage(title: 'Sweet Dreams'),
             );
