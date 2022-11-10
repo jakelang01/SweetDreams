@@ -6,6 +6,7 @@ import 'dreams/presenter/dreams_presenter.dart';
 import 'dreams/views/dreams_input.dart';
 import 'dreams/views/dreams_healthy_habits.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'dreams/views/dreams_output.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -112,6 +113,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 child: Text('motd test'),
                 onPressed: getMOTD,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.blueAccent
+                ),
+                child: Text('See Previous Night\'s Sleep'), // better way to phrase this?
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return OutputScreen();
+                          }));
+                },
               ),
             ],
           )

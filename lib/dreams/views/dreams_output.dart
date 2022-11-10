@@ -40,3 +40,33 @@ class _SleepOutputPageState extends State<SleepOutput> {
     FocusScope.of(context).requestFocus(nextFocus);
   }
 }
+class OutputScreen extends StatefulWidget {
+  @override
+  _OutputScreen createState() => _OutputScreen();
+}
+
+class _OutputScreen extends State<OutputScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('See Previous Night\'s Sleep Data'),
+          centerTitle: true,
+          backgroundColor: Colors.blueAccent.shade700,
+        ),
+        backgroundColor: Colors.white,
+        body: ListView(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.all(5.0)),
+            Text("Do stuff here"),
+            Padding(padding: EdgeInsets.all(5.0)),
+          ],
+        )
+    );
+  }
+}
