@@ -25,11 +25,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   String dailyMessage = "";
-  final messageDB = FirebaseFirestore.instance.collection('Messages');
+  final messageDB = FirebaseFirestore.instance.collection('Admin');
+
+  void initState() {
+    super.initState();
+    getMOTD();
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (dailyMessage == "") getMOTD();
     return Scaffold(
       appBar: AppBar(
         title: Text("Sweet Dreams"),
@@ -117,10 +121,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> getMOTD() async {
-    DocumentSnapshot data = await messageDB.doc("MOTD").get();
-    String unformatted = data.data().toString();
+    DocumentSnapshot data =  await messageDB.doc("Message of the Day").get();
     setState(() {
-      dailyMessage = unformatted.substring(9, unformatted.length - 1);
+      dailyMessage = data.get("motd");
     });
   }
 }
