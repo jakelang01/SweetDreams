@@ -15,8 +15,33 @@ class SleepVideosPage extends StatefulWidget {
 
 class _SleepVideosPageState extends State<SleepVideosPage> {
 
+  late YoutubePlayerController controller1;
+  final databaseReference = FirebaseFirestore.instance.collection('Admin');
+  late String id1;
+
+  void getVideoID() async {
+    DocumentSnapshot data =  await databaseReference.doc("Videos").get();
+    id1 = data.get("id1");
+    setState(() {
+      controller1 = YoutubePlayerController(
+        initialVideoId: id1,
+        flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: false,
+          enableCaption: true,
+        ),
+      );
+    });
+  }
+
+
   void initState() {
     super.initState();
+    getVideoID();
   }
 
   @override
@@ -24,16 +49,26 @@ class _SleepVideosPageState extends State<SleepVideosPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Healthy Habits: Video Resources'),
+          title: Text('Video Resources'),
           centerTitle: true,
-          backgroundColor: Colors.blueAccent.shade700,
+          backgroundColor: Theme.of(context).colorScheme.primary
         ),
         backgroundColor: Colors.white,
         body: ListView(
           children: <Widget>[
             Padding(padding: EdgeInsets.all(5.0)),
-            Text("Do stuff here"),
+            Text("Mayo Clinic - Healthy Sleep",
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .headline2,
+              textAlign: TextAlign.center,
+            ),
             Padding(padding: EdgeInsets.all(5.0)),
+            YoutubePlayer(
+              controller: controller1,
+              showVideoProgressIndicator: true,
+            ),
           ],
         )
     );
