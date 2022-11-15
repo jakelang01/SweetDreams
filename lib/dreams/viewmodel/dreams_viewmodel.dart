@@ -18,6 +18,9 @@ class UNITSViewModel {
 
   String healthySleepAgeRange = "18 to 60 Years Old";
   String healthySleepAmountPerNight = "7 or more hours per night.";
+  String healthyFoodHabits = "Eat about 3 hours before going to bed";
+  String healthyCaffeine = "Stay away from caffeine before 5 hours";
+  String healthyPhone = "Try to stay off your phone for the last hour before bed";
 
   double hour = 0.0;
   double minute = 0.0;
