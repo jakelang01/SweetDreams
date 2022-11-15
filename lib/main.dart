@@ -101,9 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               ElevatedButton(
                 child: Text('Update MOTD'),
-                onPressed: () {
-                  updateMOTD("test message - Ethan");
-                }
+                onPressed: _updateMOTDDialogue,
               ),
               ElevatedButton(
                 child: Text('See Previous Night\'s Sleep'),
@@ -138,6 +136,34 @@ class _MyHomePageState extends State<MyHomePage> {
     await messageDB.doc("Message of the Day").set(newEntry);
     // update Message of the Day in the app screen
     getMOTD();
+  }
+
+  Future<void> _updateMOTDDialogue() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Input MOTD"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter a new Message of the Day'
+                  ),
+                  onSubmitted: (String text) async {
+                    updateMOTD(text);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    );
   }
 }
 
