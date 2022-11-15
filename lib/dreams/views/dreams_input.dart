@@ -140,12 +140,19 @@ class _InputScreen extends State<InputScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child:Text(
-                'When did you fall asleep? And when did you wake up?',
+                'When did you fall asleep?',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 textScaleFactor: 1.1,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               )
+          ),
+          Text(
+            'And when did you wake up?',
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            textScaleFactor: 1.1,
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
