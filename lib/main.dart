@@ -6,6 +6,7 @@ import 'dreams/presenter/dreams_presenter.dart';
 import 'dreams/views/dreams_input.dart';
 import 'dreams/views/dreams_healthy_habits.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'dreams/views/dreams_output.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,19 +25,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   String dailyMessage = "";
-  final messageDB = FirebaseFirestore.instance.collection('Messages');
+  final messageDB = FirebaseFirestore.instance.collection('Admin');
 
-  Future<void> getMOTD() async {
-    DocumentSnapshot data =  await messageDB.doc("MOTD").get();
-    String unformatted = data.data().toString();
-    setState(() {
-      dailyMessage = unformatted.substring(9,unformatted.length - 1);
-    });
+  void initState() {
+    super.initState();
+    getMOTD();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (dailyMessage == "") getMOTD();
     return Scaffold(
       appBar: AppBar(
         title: Text("Sweet Dreams"),
@@ -44,33 +41,34 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
           child: Column(
             children: <Widget>[
+              Text("Sweet Dreams!",
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headline1,
+                textAlign: TextAlign.center,
+              ),
               Padding(
-                padding: EdgeInsets.only(top: 20.0,
-                    bottom: 20.0),
-                child: Text("Sweet Dreams!",
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent),
-                  textScaleFactor: 3,)
-                ,),
+                padding: EdgeInsets.only(bottom: 15.0),
+              ),
               Text("Message of the Day:",
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-                textScaleFactor: 1.7,),
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headline2,
+                textAlign: TextAlign.center,
+              ),
+              Text(dailyMessage,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .bodyText2,
+                textAlign: TextAlign.center,
+              ),
               Padding(
-                padding: EdgeInsets.all(10.0),
-                child: Text(dailyMessage,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.italic,
-                      color: Colors.blueGrey),
-                  textScaleFactor: 1.3,)
-                ,),
+                padding: EdgeInsets.only(bottom: 15.0),
+              ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent
-                ),
                 child: Text('Sleep Calculator'),
                 onPressed: () {
                   Navigator.of(context).push(
@@ -81,10 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent
-                ),
-                child: Text('Add Sleep Data'),
+                child: Text('Last Night\'s Sleep'),
+                // better way to phrase this?
                 onPressed: () {
                   Navigator.of(context).push(
                       MaterialPageRoute(
@@ -94,9 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent
-                ),
                 child: Text('Healthy Sleep Habits'),
                 onPressed: () {
                   Navigator.of(context).push(
@@ -107,17 +100,72 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.blueAccent
-                ),
-                child: Text('test'),
-                onPressed: getMOTD,
+                child: Text('Update MOTD'),
+                onPressed: _updateMOTDDialogue,
+              ),
+              ElevatedButton(
+                child: Text('See Previous Night\'s Sleep'),
+                // better way to phrase this?
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return OutputScreen();
+                          }));
+                },
               ),
             ],
           )
       ),
     );
-  }}
+  }
+
+  Future<void> getMOTD() async {
+    DocumentSnapshot data =  await messageDB.doc("Message of the Day").get();
+    setState(() {
+      dailyMessage = data.get("motd");
+    });
+  }
+
+  Future<void> updateMOTD(String newMessage) async {
+    // set up map for data to be inputted into Message Of The Day Document
+    final newEntry = <String, String>{
+      "motd": newMessage,
+    };
+    // edit Message of the Day Document with new Message of the Day
+    await messageDB.doc("Message of the Day").set(newEntry);
+    // update Message of the Day in the app screen
+    getMOTD();
+  }
+
+  Future<void> _updateMOTDDialogue() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Input MOTD"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter a new Message of the Day'
+                  ),
+                  onSubmitted: (String text) async {
+                    updateMOTD(text);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -134,10 +182,30 @@ class MyApp extends StatelessWidget {
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return MaterialApp(
-              title: 'Flutter Demo',
+              title: 'Sweet Dreams',
               theme: ThemeData(
+                colorScheme: ColorScheme.fromSwatch(
+                    primarySwatch: Colors.deepPurple
+                ),
 
-                primarySwatch: Colors.blue,
+                fontFamily: 'Roboto',
+                textTheme: const TextTheme(
+                  headline1: TextStyle(
+                    fontSize: 48.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  headline2: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  bodyText2: TextStyle(
+                    fontSize: 18.0,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.black45,
+                  ),
+                ),
               ),
               home: const MyHomePage(title: 'Sweet Dreams'),
             );
