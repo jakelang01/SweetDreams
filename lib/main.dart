@@ -100,8 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                child: Text('motd test'),
-                onPressed: getMOTD,
+                child: Text('Update MOTD'),
+                onPressed: _updateMOTDDialogue,
               ),
               ElevatedButton(
                 child: Text('See Previous Night\'s Sleep'),
@@ -125,6 +125,45 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       dailyMessage = data.get("motd");
     });
+  }
+
+  Future<void> updateMOTD(String newMessage) async {
+    // set up map for data to be inputted into Message Of The Day Document
+    final newEntry = <String, String>{
+      "motd": newMessage,
+    };
+    // edit Message of the Day Document with new Message of the Day
+    await messageDB.doc("Message of the Day").set(newEntry);
+    // update Message of the Day in the app screen
+    getMOTD();
+  }
+
+  Future<void> _updateMOTDDialogue() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Input MOTD"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter a new Message of the Day'
+                  ),
+                  onSubmitted: (String text) async {
+                    updateMOTD(text);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    );
   }
 }
 
