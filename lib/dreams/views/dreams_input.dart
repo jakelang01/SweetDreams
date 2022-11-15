@@ -50,6 +50,34 @@ class _InputScreen extends State<InputScreen> {
     _rating = _initialRating;
   }
 
+  Future<void> _confirmedBox() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Submitted!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Your data has been submitted.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+                Navigator.of(context).pop(false);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,11 +221,12 @@ class _InputScreen extends State<InputScreen> {
               ),
               child: Text('Submit'),
               onPressed: () {
+                _confirmedBox();
                 handleNewDay(wentToSleep.text, _userRating.toInt(), wokeUp.text, userDescription.text);
                 wentToSleep.dispose();
                 wokeUp.dispose();
                 userDescription.dispose();
-                Navigator.of(context).pop(false);
+                //Navigator.of(context).popUntil((route) => false);
               },
             )
           )
@@ -229,46 +258,3 @@ class _InputScreen extends State<InputScreen> {
     );
   }
 }
-
-/*
-class SleepInput extends StatefulWidget {
-
-  SleepInput({required Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _SleepInputPageState createState() => _SleepInputPageState();
-}
-
-class _SleepInputPageState extends State<SleepInput> {
-  //removes specific day from collection specific day number as parameter
-  void deleteDay(int collectionDay){
-    night.removeNight(collectionDay);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Add Last Night\'s Sleep Data'),
-          centerTitle: true,
-          backgroundColor: Colors.blueAccent.shade700,
-        ),
-        backgroundColor: Colors.white,
-        body: ListView(
-          children: <Widget>[
-            Padding(padding: EdgeInsets.all(5.0)),
-            Text("Do stuff here"),
-            Padding(padding: EdgeInsets.all(5.0)),
-          ],
-        )
-    );
-  }
-
-  _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);
-  }
-}
-*/
