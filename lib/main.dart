@@ -7,6 +7,8 @@ import 'dreams/views/dreams_input.dart';
 import 'dreams/views/dreams_healthy_habits.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'dreams/views/dreams_output.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -164,6 +166,22 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       }
     );
+  }
+
+  // method to check password taken from https://stackoverflow.com/questions/56186457/how-to-hash-value-in-flutter-using-sha256
+  Future<bool> checkAdminPassword(String password) async {
+    // constant salt for now - vary based on username?
+    var saltValue = 'sleepyTime';
+    // utf8 representation of string
+    var localSaltedPasswordBytes = utf8.encode(password + saltValue);
+    // hashed string
+    var localSaltedPasswordDigest = sha256.convert(localSaltedPasswordBytes);
+    // hashed password in database
+    var data =  await messageDB.doc("Account").get();
+    var databasePassword = data.get("password");
+    if (localSaltedPasswordDigest == databasePassword)
+      return true;
+    return false;
   }
 }
 
