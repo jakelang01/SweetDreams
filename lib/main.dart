@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:intl/intl.dart';
 import 'dreams/views/dreams_component.dart';
 import 'dreams/presenter/dreams_presenter.dart';
 import 'dreams/views/dreams_input.dart';
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ElevatedButton(
-                child: Text('Last Night\'s Sleep'),
+                child: Text('Log Last Night\'s Sleep'),
                 // better way to phrase this?
                 onPressed: () {
                   Navigator.of(context).push(
@@ -117,6 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           )
       ),
+      drawer: HamburgerDir(),
     );
   }
 
@@ -241,3 +243,74 @@ class _HealthyHabitsScreen extends State<HealthyHabitsScreen> {
   }
 }
 
+class HamburgerDir extends StatelessWidget {
+
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  @override
+  Future<void> LoginBox(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Log In:'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: TextField(
+                    controller: username,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Username',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: TextField(
+                    controller: password,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Password',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text('Sign In'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: [
+          ListTile(title: Text('Admin Sign In'), onTap: (){
+            LoginBox(context);
+          }),
+        ],
+      ),
+    );
+  }
+
+  Future<dynamic> _navPush(BuildContext context, Widget page) {
+    return Navigator.push(context, MaterialPageRoute(
+      builder: (context) => page,
+    ));
+  }
+}

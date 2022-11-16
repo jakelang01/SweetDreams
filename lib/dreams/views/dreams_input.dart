@@ -224,7 +224,7 @@ class _InputScreen extends State<InputScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child:ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  primary: Colors.blueAccent
+                  primary: Colors.deepPurple
               ),
               child: Text('Submit'),
               onPressed: () {
