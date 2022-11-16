@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../views/dreams_view.dart';
 import '../presenter/dreams_presenter.dart';
+import 'dreams_videos.dart';
 
 class HealthyHabits extends StatefulWidget {
 
@@ -113,6 +114,16 @@ class _HealthyHabitsPageState extends State<HealthyHabits> {
                     style: TextStyle(fontSize: 24, color: Colors.white),
                     maxLines: 3,
                ),
+             ),
+             ElevatedButton(
+               child: Text('Video Resources'),
+               onPressed: () {
+                 Navigator.of(context).push(
+                     MaterialPageRoute(
+                         builder: (BuildContext context) {
+                           return SleepVideosPage(title: 'videos', key: Key("videos"));
+                         }));
+               },
              ),
            ] // Children
        ),
