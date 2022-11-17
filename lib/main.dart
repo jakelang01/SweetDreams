@@ -216,7 +216,11 @@ class _HealthyHabitsScreen extends State<HealthyHabitsScreen> {
   }
 }
 
-class HamburgerDir extends StatelessWidget {
+class HamburgerDir extends StatefulWidget {
+  _HamburgerDir createState() => _HamburgerDir();
+}
+
+class _HamburgerDir extends State<HamburgerDir> {
 
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
