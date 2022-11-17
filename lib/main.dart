@@ -221,12 +221,7 @@ class _HealthyHabitsScreen extends State<HealthyHabitsScreen> {
   }
 }
 
-class HamburgerDir extends StatefulWidget {
-  _HamburgerDir createState() => _HamburgerDir();
-}
-
-class _HamburgerDir extends State<HamburgerDir> {
-
+class HamburgerDir extends StatelessWidget {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
 
@@ -282,9 +277,6 @@ class _HamburgerDir extends State<HamburgerDir> {
     return Drawer(
       child: ListView(
         children: [
-          ListTile(title: Text('Admin Sign In'), onTap: (){
-            LoginBox(context);
-          }),
           ListTile(title: Text('Sleep Calculator'), onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
@@ -319,6 +311,9 @@ class _HamburgerDir extends State<HamburgerDir> {
                     builder: (BuildContext context) {
                       return SleepVideosPage(title: 'videos', key: Key("videos"));
                     }));
+          }),
+          ListTile(title: Text('Update MOTD'), onTap: (){
+            LoginBox(context);
           }),
         ],
       ),
