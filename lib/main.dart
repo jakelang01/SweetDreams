@@ -175,6 +175,11 @@ class MyApp extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
+                  bodyText1: TextStyle(
+                    fontSize: 18.0,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.deepPurpleAccent,
+                  ),
                   bodyText2: TextStyle(
                     fontSize: 18.0,
                     fontStyle: FontStyle.italic,
