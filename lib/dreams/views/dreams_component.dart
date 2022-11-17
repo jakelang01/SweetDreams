@@ -119,20 +119,20 @@ class _HomePageState extends State<HomePage> implements UNITSView {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Radio<int>(
-          activeColor: Colors.blueAccent.shade700,
+          activeColor: Theme.of(context).colorScheme.primary,
           value: 0, groupValue: _value, onChanged: handleRadioValueChanged,
         ),
         Text(
           'Wake up at',
-          style: TextStyle(color: Colors.blueAccent.shade700),
+          style: Theme.of(context).textTheme.bodyText1,
         ),
         Radio<int>(
-          activeColor: Colors.blueAccent.shade700,
+          activeColor: Theme.of(context).colorScheme.primary,
           value: 1, groupValue: _value, onChanged: handleRadioValueChanged,
         ),
         Text(
           'Go to bed at',
-          style: TextStyle(color: Colors.blueAccent.shade700),
+          style: Theme.of(context).textTheme.bodyText1,
         ),
       ],
     );
@@ -141,20 +141,20 @@ class _HomePageState extends State<HomePage> implements UNITSView {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Radio<int>(
-          activeColor: Colors.blueAccent.shade700,
+          activeColor: Theme.of(context).colorScheme.primary,
           value: 0, groupValue: _valueTime, onChanged: handleRadioValueChangedTime,
         ),
         Text(
           'AM',
-          style: TextStyle(color: Colors.blueAccent.shade700),
+          style: Theme.of(context).textTheme.bodyText1,
         ),
         Radio<int>(
-          activeColor: Colors.blueAccent.shade700,
+          activeColor: Theme.of(context).colorScheme.primary,
           value: 1, groupValue: _valueTime, onChanged: handleRadioValueChangedTime,
         ),
         Text(
           'PM',
-          style: TextStyle(color: Colors.blueAccent.shade700),
+          style: Theme.of(context).textTheme.bodyText1,
         ),
       ],
     );
@@ -228,7 +228,6 @@ class _HomePageState extends State<HomePage> implements UNITSView {
         appBar: AppBar(
           title: Text('Sleep Calculator'),
           centerTitle: true,
-          backgroundColor: Colors.blueAccent.shade700,
         ),
         backgroundColor: Colors.white,
         body: ListView(
@@ -246,7 +245,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
     return ElevatedButton(
       onPressed: _calculator,
       style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blueAccent.shade700,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           textStyle: TextStyle(color: Colors.white70)
       ),
       child: Text(
