@@ -8,6 +8,7 @@ import 'dreams/views/dreams_input.dart';
 import 'dreams/views/dreams_healthy_habits.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'dreams/views/dreams_output.dart';
+import 'dreams/views/dreams_videos.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 
@@ -70,52 +71,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 15.0),
-              ),
-              ElevatedButton(
-                child: Text('Sleep Calculator'),
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return SplashScreen();
-                          }));
-                },
-              ),
-              ElevatedButton(
-                child: Text('Log Last Night\'s Sleep'),
-                // better way to phrase this?
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return InputScreen();
-                          }));
-                },
-              ),
-              ElevatedButton(
-                child: Text('Healthy Sleep Habits'),
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return HealthyHabitsScreen();
-                          }));
-                },
-              ),
-              ElevatedButton(
-                child: Text('Update MOTD'),
-                onPressed: _updateMOTDDialogue,
-              ),
-              ElevatedButton(
-                child: Text('See Previous Night\'s Sleep'),
-                // better way to phrase this?
-                onPressed: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return OutputScreen();
-                          }));
-                },
               ),
             ],
           )
@@ -320,6 +275,41 @@ class HamburgerDir extends StatelessWidget {
         children: [
           ListTile(title: Text('Admin Sign In'), onTap: (){
             LoginBox(context);
+          }),
+          ListTile(title: Text('Sleep Calculator'), onTap: (){
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return SplashScreen();
+                    }));
+          }),
+          ListTile(title: Text('Log Last Night\'s Sleep'), onTap: (){
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return InputScreen();
+                    }));
+          }),
+          ListTile(title: Text('See Previous Night\'s Sleep'), onTap: (){
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return OutputScreen();
+                    }));
+          }),
+          ListTile(title: Text('Healthy Sleep Habits'), onTap: (){
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return HealthyHabitsScreen();
+                    }));
+          }),
+          ListTile(title: Text('Healthy Sleep Videos'), onTap: (){
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return SleepVideosPage(title: 'videos', key: Key("videos"));
+                    }));
           }),
         ],
       ),
