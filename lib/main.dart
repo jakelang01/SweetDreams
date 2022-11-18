@@ -42,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("Sweet Dreams"),
       ),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
           child: Column(
             children: <Widget>[
@@ -162,6 +163,9 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSwatch(
                     primarySwatch: Colors.deepPurple
                 ),
+                backgroundColor: Colors.white,
+                canvasColor: Colors.grey.shade300,
+                accentColor: Colors.deepPurpleAccent,
 
                 fontFamily: 'Roboto',
                 textTheme: const TextTheme(
@@ -187,6 +191,39 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
               ),
+              darkTheme: ThemeData(
+                colorScheme: ColorScheme.fromSwatch(
+                    primarySwatch: Colors.deepPurple
+                ),
+                backgroundColor: Colors.white10,
+                canvasColor: Colors.grey.shade300,
+                accentColor: Colors.deepPurpleAccent,
+
+                fontFamily: 'Roboto',
+                textTheme: const TextTheme(
+                  headline1: TextStyle(
+                    fontSize: 48.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  headline2: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white70,
+                  ),
+                  bodyText1: TextStyle(
+                    fontSize: 18.0,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  bodyText2: TextStyle(
+                    fontSize: 18.0,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.white60,
+                  ),
+                ),
+              ),
+              themeMode: ThemeMode.system,
               home: const MyHomePage(title: 'Sweet Dreams'),
             );
           }
