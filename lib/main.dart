@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
-          child: Column(
+          child: ListView(
             children: <Widget>[
               Text("Sweet Dreams!",
                 style: Theme
@@ -189,6 +189,11 @@ class MyApp extends StatelessWidget {
                     fontStyle: FontStyle.italic,
                     color: Colors.black45,
                   ),
+                  button: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurpleAccent,
+                  ),
                 ),
               ),
               darkTheme: ThemeData(
@@ -196,7 +201,7 @@ class MyApp extends StatelessWidget {
                     primarySwatch: Colors.deepPurple
                 ),
                 backgroundColor: Colors.white10,
-                canvasColor: Colors.grey.shade300,
+                canvasColor: Colors.grey.shade900,
                 accentColor: Colors.deepPurpleAccent,
 
                 fontFamily: 'Roboto',
@@ -220,6 +225,11 @@ class MyApp extends StatelessWidget {
                     fontSize: 18.0,
                     fontStyle: FontStyle.italic,
                     color: Colors.white60,
+                  ),
+                  button: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurpleAccent,
                   ),
                 ),
               ),
@@ -314,42 +324,51 @@ class HamburgerDir extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          ListTile(title: Text('Sleep Calculator'), onTap: (){
+          ListTile(
+              title: Text('Sleep Calculator',
+              style: Theme.of(context).textTheme.button
+              ),
+              onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {
                       return SplashScreen();
                     }));
           }),
-          ListTile(title: Text('Log Last Night\'s Sleep'), onTap: (){
+          ListTile(title: Text('Log Last Night\'s Sleep', style: Theme.of(context).textTheme.button),
+              onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {
                       return InputScreen();
                     }));
           }),
-          ListTile(title: Text('See Previous Night\'s Sleep'), onTap: (){
+          ListTile(title: Text('See Previous Night\'s Sleep', style: Theme.of(context).textTheme.button),
+              onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {
                       return OutputScreen();
                     }));
           }),
-          ListTile(title: Text('Healthy Sleep Habits'), onTap: (){
+          ListTile(title: Text('Healthy Sleep Habits', style: Theme.of(context).textTheme.button),
+              onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {
                       return HealthyHabitsScreen();
                     }));
           }),
-          ListTile(title: Text('Healthy Sleep Videos'), onTap: (){
+          ListTile(title: Text('Healthy Sleep Videos', style: Theme.of(context).textTheme.button),
+              onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {
                       return SleepVideosPage(title: 'videos', key: Key("videos"));
                     }));
           }),
-          ListTile(title: Text('Update MOTD'), onTap: (){
+          ListTile(title: Text('Update MOTD', style: Theme.of(context).textTheme.button),
+              onTap: (){
             LoginBox(context);
           }),
         ],
