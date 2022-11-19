@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
     );
 
     var _mainPartView = Container(
-      color: Colors.grey.shade300,
+      color: Theme.of(context).canvasColor,
       margin: EdgeInsets.all(8.0),
       padding: EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(top: 10.0),
-                child: Text("I want to:",style: const TextStyle(fontWeight: FontWeight.bold), textScaleFactor: 1.5,)
+                child: Text("I want to:",style: Theme.of(context).textTheme.headline2,)
                 ,),
               _unitView,
               Row(
@@ -186,7 +186,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
               _unitViewTime,
               Padding(
                 padding: EdgeInsets.only(top: 10.0),
-                child: Text("I want to sleep for:",style: const TextStyle(fontWeight: FontWeight.bold), textScaleFactor: 1.5,)
+                child: Text("I want to sleep for:",style: Theme.of(context).textTheme.headline2,)
                 ,),
               Row(
                 children: <Widget>[
@@ -229,7 +229,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
           title: Text('Sleep Calculator'),
           centerTitle: true,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: ListView(
           children: <Widget>[
             Padding(padding: EdgeInsets.all(5.0)),
@@ -261,6 +261,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
       keyboardType: TextInputType.number,
       textInputAction: TextInputAction.done,
       focusNode: _sleepMinuteFocus,
+      style: Theme.of(context).textTheme.bodyText2,
       onFieldSubmitted: (value){
         _sleepMinuteFocus.unfocus();
       },
@@ -276,7 +277,10 @@ class _HomePageState extends State<HomePage> implements UNITSView {
           hintText: 'e.g.) 40',
           labelText: 'Minute',
           icon: Icon(Icons.assessment),
-          fillColor: Colors.white
+          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
+          labelStyle: Theme.of(context).textTheme.bodyText2,
+          floatingLabelStyle: Theme.of(context).textTheme.bodyText1,
+          hintStyle: Theme.of(context).textTheme.bodyText2,
       ),
     );
   }
@@ -287,6 +291,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
       keyboardType: TextInputType.number,
       textInputAction: TextInputAction.next,
       focusNode: _sleepHourFocus,
+      style: Theme.of(context).textTheme.bodyText2,
       onFieldSubmitted: (term) {
         _fieldFocusChange(context, _sleepHourFocus, _sleepMinuteFocus);
       },
@@ -302,7 +307,10 @@ class _HomePageState extends State<HomePage> implements UNITSView {
         hintText: "e.g.) 7",
         labelText: "Hour",
         icon: Icon(Icons.assessment),
-        fillColor: Colors.white,
+        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
+        labelStyle: Theme.of(context).textTheme.bodyText2,
+        floatingLabelStyle: Theme.of(context).textTheme.bodyText1,
+        hintStyle: Theme.of(context).textTheme.bodyText2,
       ),
     );
   }
@@ -313,6 +321,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
       keyboardType: TextInputType.number,
       textInputAction: TextInputAction.next,
       focusNode: _hourFocus,
+      style: Theme.of(context).textTheme.bodyText2,
       onFieldSubmitted: (term){
         _fieldFocusChange(context, _hourFocus, _minuteFocus);
       },
@@ -328,7 +337,11 @@ class _HomePageState extends State<HomePage> implements UNITSView {
         hintText: 'e.g.) 6',
         labelText: 'Hour',
         icon: Icon(Icons.assessment),
-        fillColor: Colors.white,
+        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
+        iconColor: Theme.of(context).unselectedWidgetColor,
+        labelStyle: Theme.of(context).textTheme.bodyText2,
+        floatingLabelStyle: Theme.of(context).textTheme.bodyText1,
+        hintStyle: Theme.of(context).textTheme.bodyText2,
       ),
     );
   }
@@ -339,6 +352,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
       keyboardType: TextInputType.number,
       textInputAction: TextInputAction.next,
       focusNode: _minuteFocus,
+      style: Theme.of(context).textTheme.bodyText2,
       onFieldSubmitted: (term){
         _fieldFocusChange(context, _minuteFocus, _sleepHourFocus);
       },
@@ -354,7 +368,10 @@ class _HomePageState extends State<HomePage> implements UNITSView {
         hintText: 'e.g.) 30',
         labelText: 'Minute',
         icon: Icon(Icons.assessment),
-        fillColor: Colors.white,
+        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
+        labelStyle: Theme.of(context).textTheme.bodyText2,
+        floatingLabelStyle: Theme.of(context).textTheme.bodyText1,
+        hintStyle: Theme.of(context).textTheme.bodyText2,
       ),
     );
   }

@@ -54,21 +54,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 textAlign: TextAlign.center,
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: 15.0),
+                padding: EdgeInsets.only(bottom: 7.0),
               ),
-              Text("Message of the Day:",
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headline2,
-                textAlign: TextAlign.center,
-              ),
-              Text(dailyMessage,
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .bodyText2,
-                textAlign: TextAlign.center,
+              Container(
+                color: Theme.of(context).canvasColor,
+                margin: EdgeInsets.all(4.0),
+                padding: EdgeInsets.all(4.0),
+                child: Column(children: <Widget>[
+                  Text("Message of the Day:",
+                    style: Theme.of(context).textTheme.headline2,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(dailyMessage,
+                    style: Theme.of(context).textTheme.bodyText2,
+                    textAlign: TextAlign.center,
+                  ),
+                ])
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 15.0),
@@ -165,7 +166,7 @@ class MyApp extends StatelessWidget {
                 ),
                 backgroundColor: Colors.white,
                 canvasColor: Colors.grey.shade300,
-                accentColor: Colors.deepPurpleAccent,
+                unselectedWidgetColor: Colors.black,
 
                 fontFamily: 'Roboto',
                 textTheme: const TextTheme(
@@ -186,7 +187,7 @@ class MyApp extends StatelessWidget {
                   ),
                   bodyText2: TextStyle(
                     fontSize: 18.0,
-                    fontStyle: FontStyle.italic,
+                    //fontStyle: FontStyle.italic,
                     color: Colors.black45,
                   ),
                   button: TextStyle(
@@ -202,7 +203,7 @@ class MyApp extends StatelessWidget {
                 ),
                 backgroundColor: Colors.white10,
                 canvasColor: Colors.grey.shade900,
-                accentColor: Colors.deepPurpleAccent,
+                unselectedWidgetColor: Colors.white70,
 
                 fontFamily: 'Roboto',
                 textTheme: const TextTheme(
@@ -217,14 +218,14 @@ class MyApp extends StatelessWidget {
                     color: Colors.white70,
                   ),
                   bodyText1: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: 16.0,
                     fontStyle: FontStyle.italic,
                     color: Colors.deepPurpleAccent,
                   ),
                   bodyText2: TextStyle(
-                    fontSize: 18.0,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.white60,
+                    fontSize: 16.0,
+                    //fontStyle: FontStyle.italic,
+                    color: Colors.white70,
                   ),
                   button: TextStyle(
                     fontSize: 18.0,

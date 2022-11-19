@@ -89,7 +89,7 @@ class _InputScreen extends State<InputScreen> {
         title: Text(formattedDate),
         actions: <Widget>[],
       ),
-      body: Column(
+      body: ListView(
         children: <Widget>[
           const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 32),
@@ -124,18 +124,21 @@ class _InputScreen extends State<InputScreen> {
               )
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           ),
-          RatingBarIndicator(
-            rating: _userRating,
-            itemBuilder: (context, index) => Icon(
-            _selectedIcon ?? Icons.star,
-            color: Colors.amber,
+          Container(
+            alignment: Alignment.center,
+            child: RatingBarIndicator(
+              rating: _userRating,
+              itemBuilder: (context, index) => Icon(
+                _selectedIcon ?? Icons.star,
+                color: Colors.amber,
+              ),
+              itemCount: 5,
+              itemSize: 50.0,
+              unratedColor: Colors.amber.withAlpha(50),
+              direction: _isVertical ? Axis.vertical : Axis.horizontal,
             ),
-            itemCount: 5,
-            itemSize: 50.0,
-            unratedColor: Colors.amber.withAlpha(50),
-            direction: _isVertical ? Axis.vertical : Axis.horizontal,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
