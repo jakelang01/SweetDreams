@@ -89,81 +89,80 @@ class _InputScreen extends State<InputScreen> {
         title: Text(formattedDate),
         actions: <Widget>[],
       ),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: ListView(
         children: <Widget>[
-          const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 32),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: Text(
                 'How was your sleep?',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                textScaleFactor: 2,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 1.3,
+                style: Theme.of(context).textTheme.headline2,
               )
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             child: TextFormField(
               controller: userDescription,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
                 labelText: 'Tell us about your sleep here',
+                labelStyle: Theme.of(context).textTheme.bodyText2,
+                floatingLabelStyle: Theme.of(context).textTheme.bodyText1
                 //minLines: 1,
                 //maxLines: null,
               ),
             ),
           ),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: Text(
                 'Rate your sleep 1-5 Stars',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                textScaleFactor: 1.8,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 0.9,
+                style: Theme.of(context).textTheme.headline2,
               )
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: RatingBarIndicator(
-              rating: _userRating,
-              itemBuilder: (context, index) => Icon(
-                _selectedIcon ?? Icons.star,
-                color: Colors.amber,
+            child: Container(
+              alignment: Alignment.center,
+              child: RatingBarIndicator(
+                rating: _userRating,
+                itemBuilder: (context, index) => Icon(
+                  _selectedIcon ?? Icons.star,
+                  color: Colors.amber,
+                ),
+                itemCount: 5,
+                itemSize: 50.0,
+                unratedColor: Colors.amber.withAlpha(50),
+                direction: _isVertical ? Axis.vertical : Axis.horizontal,
               ),
-              itemCount: 5,
-              itemSize: 50.0,
-              unratedColor: Colors.amber.withAlpha(50),
-              direction: _isVertical ? Axis.vertical : Axis.horizontal,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child:Text(
                 'When did you fall asleep?',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                textScaleFactor: 1.1,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                textScaleFactor: 0.9,
+                style: Theme.of(context).textTheme.headline2,
               )
-          ),
-          Text(
-            'And when did you wake up?',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            textScaleFactor: 1.1,
-            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child:TextField(
                 controller: wentToSleep, //editing controller of this TextField
                 decoration: InputDecoration(
+                    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
                     icon: Icon(Icons.timer), //icon of text field
-                    labelText: "Went To Sleep At" //label text of field
+                    labelText: "Went To Sleep At",
+                    labelStyle: Theme.of(context).textTheme.bodyText2,
+                    floatingLabelStyle: Theme.of(context).textTheme.bodyText1,//label text of field
                 ),
                 readOnly: true,  //set it true, so that user will not able to edit text
                 onTap: () async {
@@ -192,11 +191,24 @@ class _InputScreen extends State<InputScreen> {
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child:Text(
+                'And when did you wake up?',
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                textScaleFactor: 0.9,
+                style: Theme.of(context).textTheme.headline2,
+              )
+          ),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child:TextField(
                 controller: wokeUp, //editing controller of this TextField
                 decoration: InputDecoration(
                     icon: Icon(Icons.timer), //icon of text field
-                    labelText: "Woke Up At" //label text of field
+                    labelText: "Woke Up At" , //label text of field
+                    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
+                    labelStyle: Theme.of(context).textTheme.bodyText2,
+                    floatingLabelStyle: Theme.of(context).textTheme.bodyText1,
                 ),
                 readOnly: true,  //set it true, so that user will not able to edit text
                 onTap: () async {

@@ -167,6 +167,8 @@ class MyApp extends StatelessWidget {
                 backgroundColor: Colors.white,
                 canvasColor: Colors.grey.shade300,
                 unselectedWidgetColor: Colors.black,
+                dividerColor: Colors.white,
+                scaffoldBackgroundColor: Colors.deepPurpleAccent,
 
                 fontFamily: 'Roboto',
                 textTheme: const TextTheme(
@@ -179,6 +181,10 @@ class MyApp extends StatelessWidget {
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
+                  ),
+                  headline3: TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.white,
                   ),
                   bodyText1: TextStyle(
                     fontSize: 18.0,
@@ -204,9 +210,11 @@ class MyApp extends StatelessWidget {
                 backgroundColor: Colors.white10,
                 canvasColor: Colors.grey.shade900,
                 unselectedWidgetColor: Colors.white70,
+                dividerColor: Colors.deepPurpleAccent,
+                scaffoldBackgroundColor: Colors.grey.shade900,
 
                 fontFamily: 'Roboto',
-                textTheme: const TextTheme(
+                textTheme: TextTheme(
                   headline1: TextStyle(
                     fontSize: 48.0,
                     fontWeight: FontWeight.bold,
@@ -216,6 +224,10 @@ class MyApp extends StatelessWidget {
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.white70,
+                  ),
+                  headline3: TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.deepPurpleAccent,
                   ),
                   bodyText1: TextStyle(
                     fontSize: 16.0,
