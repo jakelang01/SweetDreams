@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/intl.dart';
+import 'package:units/dreams/views/dreams_diary.dart';
 import 'dreams/views/dreams_component.dart';
 import 'dreams/presenter/dreams_presenter.dart';
 import 'dreams/views/dreams_input.dart';
+import 'dreams/views/dreams_diary.dart';
 import 'dreams/views/dreams_healthy_habits.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'dreams/views/dreams_output.dart';
@@ -314,6 +316,13 @@ class HamburgerDir extends StatelessWidget {
           }),
           ListTile(title: Text('Update MOTD'), onTap: (){
             LoginBox(context);
+            }),
+          ListTile(title: Text('Daily Diary'), onTap: (){
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return DiaryScreen();
+                    }));
           }),
         ],
       ),
