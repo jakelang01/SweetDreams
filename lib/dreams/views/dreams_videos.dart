@@ -62,10 +62,7 @@ class _SleepVideosPageState extends State<SleepVideosPage> {
         Padding(
             padding: EdgeInsets.all(5.0),
             child: Text(header,
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headline2,
+              style: Theme.of(context).textTheme.headline2,
               textAlign: TextAlign.center,
             ),
         ),
@@ -92,7 +89,7 @@ class _SleepVideosPageState extends State<SleepVideosPage> {
           centerTitle: true,
           backgroundColor: Theme.of(context).colorScheme.primary
         ),
-        backgroundColor: Colors.white,
+        //backgroundColor: Theme.of(context).backgroundColor, // this breaks everything for some reason
         body: ListView(
           children: <Widget>[
             createPlayer(controller1, header1),

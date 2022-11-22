@@ -25,18 +25,19 @@ class _HealthyHabitsPageState extends State<HealthyHabits> {
      appBar: AppBar(
        title: Text('Healthy Sleep Habits'),
        centerTitle: true,
-       backgroundColor: Colors.purpleAccent.shade700,
+       //backgroundColor: Colors.purpleAccent.shade700,
      ),
-     backgroundColor: Colors.white,
+     backgroundColor: Theme.of(context).backgroundColor,
      body: SingleChildScrollView(
        child: Column(
            children: [
+             Padding(padding: EdgeInsets.only(top: 16)),
              Container(
                decoration: BoxDecoration(
-                 color: Colors.purple,
+                 color: Theme.of(context).scaffoldBackgroundColor,
                  border: Border(
                    bottom: BorderSide(
-                     color: Colors.white,
+                     color: Theme.of(context).dividerColor,
                      width: 2,
                    ),
                  ),
@@ -44,32 +45,32 @@ class _HealthyHabitsPageState extends State<HealthyHabits> {
                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                child: Text(
                  'People ages 18-70 should be getting at least 7 or more hours of sleep per night.',
-                     style: TextStyle(fontSize: 24, color: Colors.white),
+                     style: Theme.of(context).textTheme.headline3,
                      maxLines: 3,
                ),
              ),
              Container(
                decoration: BoxDecoration(
-                 color: Colors.purple,
+                 color: Theme.of(context).scaffoldBackgroundColor,
                  border: Border(
                    bottom: BorderSide(
-                    color: Colors.white,
+                    color: Theme.of(context).dividerColor,
                       width: 2),
                  ),
                ),
                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                child: Text(
                  'The best sleep habit you could make for yourself is making sure the times you wake up and go to bed are consistent each day.',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: Theme.of(context).textTheme.headline3,
                     maxLines: 3,
                  ),
                ),
              Container(
                decoration: BoxDecoration(
-                 color: Colors.purple,
+                 color: Theme.of(context).scaffoldBackgroundColor,
                  border: Border(
                    bottom: BorderSide(
-                     color: Colors.white,
+                     color: Theme.of(context).dividerColor,
                      width: 2,
                    ),
                  ),
@@ -77,16 +78,16 @@ class _HealthyHabitsPageState extends State<HealthyHabits> {
                padding:  EdgeInsets.fromLTRB(20, 20, 20, 20),
                child: Text(
                  'Try your best to stay away from caffeine, large meals, and alcohol about 2 hours or more before you head to bed.',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: Theme.of(context).textTheme.headline3,
                     maxLines: 3,
                ),
              ),
              Container(
                decoration: BoxDecoration(
-                 color: Colors.purple,
+                 color: Theme.of(context).scaffoldBackgroundColor,
                  border: Border(
                    bottom: BorderSide(
-                     color: Colors.white,
+                     color: Theme.of(context).dividerColor,
                      width: 2,
                    ),
                  ),
@@ -94,16 +95,16 @@ class _HealthyHabitsPageState extends State<HealthyHabits> {
                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                child: Text(
                  'If you find yourself struggling to fall asleep at night, try including some exercise in your daily routine.',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: Theme.of(context).textTheme.headline3,
                     maxLines: 3,
                ),
              ),
              Container(
                decoration: BoxDecoration(
-                 color: Colors.purple,
+                 color: Theme.of(context).scaffoldBackgroundColor,
                  border: Border(
                    bottom: BorderSide(
-                     color: Colors.white,
+                     color: Theme.of(context).dividerColor,
                      width: 2
                    ),
                  ),
@@ -111,7 +112,7 @@ class _HealthyHabitsPageState extends State<HealthyHabits> {
                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                child: Text(
                  'Whatever sleep habit I also have to add idk yet',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: Theme.of(context).textTheme.headline3,
                     maxLines: 3,
                ),
              ),

@@ -44,8 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("Sweet Dreams"),
       ),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
-          child: Column(
+          child: ListView(
             children: <Widget>[
               Text("Sweet Dreams!",
                 style: Theme
@@ -55,21 +56,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 textAlign: TextAlign.center,
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: 15.0),
+                padding: EdgeInsets.only(bottom: 7.0),
               ),
-              Text("Message of the Day:",
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headline2,
-                textAlign: TextAlign.center,
-              ),
-              Text(dailyMessage,
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .bodyText2,
-                textAlign: TextAlign.center,
+              Container(
+                color: Theme.of(context).canvasColor,
+                margin: EdgeInsets.all(4.0),
+                padding: EdgeInsets.all(4.0),
+                child: Column(children: <Widget>[
+                  Text("Message of the Day:",
+                    style: Theme.of(context).textTheme.headline2,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(dailyMessage,
+                    style: Theme.of(context).textTheme.bodyText2,
+                    textAlign: TextAlign.center,
+                  ),
+                ])
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 15.0),
@@ -164,6 +166,11 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSwatch(
                     primarySwatch: Colors.deepPurple
                 ),
+                backgroundColor: Colors.white,
+                canvasColor: Colors.grey.shade300,
+                unselectedWidgetColor: Colors.black,
+                dividerColor: Colors.white,
+                scaffoldBackgroundColor: Colors.deepPurpleAccent,
 
                 fontFamily: 'Roboto',
                 textTheme: const TextTheme(
@@ -177,6 +184,10 @@ class MyApp extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
+                  headline3: TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.white,
+                  ),
                   bodyText1: TextStyle(
                     fontSize: 18.0,
                     fontStyle: FontStyle.italic,
@@ -184,11 +195,60 @@ class MyApp extends StatelessWidget {
                   ),
                   bodyText2: TextStyle(
                     fontSize: 18.0,
-                    fontStyle: FontStyle.italic,
+                    //fontStyle: FontStyle.italic,
                     color: Colors.black45,
+                  ),
+                  button: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurpleAccent,
                   ),
                 ),
               ),
+              darkTheme: ThemeData(
+                colorScheme: ColorScheme.fromSwatch(
+                    primarySwatch: Colors.deepPurple
+                ),
+                backgroundColor: Colors.white10,
+                canvasColor: Colors.grey.shade900,
+                unselectedWidgetColor: Colors.white70,
+                dividerColor: Colors.deepPurpleAccent,
+                scaffoldBackgroundColor: Colors.grey.shade900,
+
+                fontFamily: 'Roboto',
+                textTheme: TextTheme(
+                  headline1: TextStyle(
+                    fontSize: 48.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  headline2: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white70,
+                  ),
+                  headline3: TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  bodyText1: TextStyle(
+                    fontSize: 16.0,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  bodyText2: TextStyle(
+                    fontSize: 16.0,
+                    //fontStyle: FontStyle.italic,
+                    color: Colors.white70,
+                  ),
+                  button: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                ),
+              ),
+              themeMode: ThemeMode.system,
               home: const MyHomePage(title: 'Sweet Dreams'),
             );
           }
@@ -279,42 +339,51 @@ class HamburgerDir extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          ListTile(title: Text('Sleep Calculator'), onTap: (){
+          ListTile(
+              title: Text('Sleep Calculator',
+              style: Theme.of(context).textTheme.button
+              ),
+              onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {
                       return SplashScreen();
                     }));
           }),
-          ListTile(title: Text('Log Last Night\'s Sleep'), onTap: (){
+          ListTile(title: Text('Log Last Night\'s Sleep', style: Theme.of(context).textTheme.button),
+              onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {
                       return InputScreen();
                     }));
           }),
-          ListTile(title: Text('See Previous Night\'s Sleep'), onTap: (){
+          ListTile(title: Text('See Previous Night\'s Sleep', style: Theme.of(context).textTheme.button),
+              onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {
                       return OutputScreen();
                     }));
           }),
-          ListTile(title: Text('Healthy Sleep Habits'), onTap: (){
+          ListTile(title: Text('Healthy Sleep Habits', style: Theme.of(context).textTheme.button),
+              onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {
                       return HealthyHabitsScreen();
                     }));
           }),
-          ListTile(title: Text('Healthy Sleep Videos'), onTap: (){
+          ListTile(title: Text('Healthy Sleep Videos', style: Theme.of(context).textTheme.button),
+              onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {
                       return SleepVideosPage(title: 'videos', key: Key("videos"));
                     }));
           }),
-          ListTile(title: Text('Update MOTD'), onTap: (){
+          ListTile(title: Text('Update MOTD', style: Theme.of(context).textTheme.button),
+              onTap: (){
             LoginBox(context);
             }),
           ListTile(title: Text('Daily Diary'), onTap: (){
