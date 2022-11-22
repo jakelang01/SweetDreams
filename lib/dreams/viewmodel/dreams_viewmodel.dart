@@ -10,8 +10,8 @@ class UNITSViewModel {
   String _timeType = "";
   String _message = "";
 
-//database reference for collection Sleep Hours
-  final databaseReference = FirebaseFirestore.instance.collection('Sleep Hours');
+//database reference for collection example user
+  //final databaseReference = FirebaseFirestore.instance.collection('Example User');
   final String createText = "Create new day";
   final String getText = "Get Day";
   final String removeText = "Remove Day";

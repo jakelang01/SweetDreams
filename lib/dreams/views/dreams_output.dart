@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import '../views/dreams_view.dart';
 import '../presenter/dreams_presenter.dart';
 
+List<String> list = <String>['Night1', 'Night2', 'Night3', 'Night4'];
+String _dropdownValue1 = list.first;
+String _dropdownValue2 = list.last;
+String bedTime1 = 'no value';
+
 class SleepOutput extends StatefulWidget {
 
   SleepOutput({required Key? key, required this.title}) : super(key: key);
@@ -14,6 +19,7 @@ class SleepOutput extends StatefulWidget {
 }
 
 class _SleepOutputPageState extends State<SleepOutput> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +52,15 @@ class OutputScreen extends StatefulWidget {
 }
 
 class _OutputScreen extends State<OutputScreen> {
+
+  RecordNewNight night = new RecordNewNight();
+
+  void getTheBedTime(String nightNumber) async {
+    Future<String> bedFuture = night.getBedtime(nightNumber);
+    bedTime1 = await bedFuture;
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -60,13 +75,56 @@ class _OutputScreen extends State<OutputScreen> {
           backgroundColor: Colors.blueAccent.shade700,
         ),
         backgroundColor: Colors.white,
-        body: ListView(
-          children: <Widget>[
-            Padding(padding: EdgeInsets.all(5.0)),
-            Text("Do stuff here"),
-            Padding(padding: EdgeInsets.all(5.0)),
-          ],
+        body: Column(
+                children:<Widget>[
+                DropdownButton(
+                    dropdownColor: Colors.deepPurple,
+                    borderRadius: BorderRadius.circular(.5),
+                    items: list.map((location){
+                      return DropdownMenuItem(
+                        child: new Text(location),
+                        value: location,
+                    );
+                  }).toList(),
+                  value: _dropdownValue1,
+                  alignment: AlignmentDirectional.center,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      getTheBedTime(_dropdownValue1);
+                      _dropdownValue1 = newValue!;
+
+                    });
+                  }),
+            Expanded(
+              child: Text(
+                bedTime1 + _dropdownValue1,
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.visible,
+                textScaleFactor: 1,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            )
+                ]
         )
     );
   }
 }
+
+//for the database reference need future builder
+// Expanded(
+// child: FutureBuilder<String>(
+// future: getTheBedtime(_dropdownValue1),
+// builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+// if (snapshot.hasData) {
+// Padding(
+// padding: const EdgeInsets.only(top: 16),
+// child: Text('Result: ${snapshot.data}'),
+// );
+// }
+// return Scaffold(
+// body: Text("this is text"),
+// );
+// })
+// )
+
+
