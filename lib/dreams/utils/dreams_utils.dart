@@ -71,3 +71,4 @@ void saveValue(int value) async{
   SharedPreferences preferences = await SharedPreferences.getInstance();
   preferences.setInt('data', value);
 }
+

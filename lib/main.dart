@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/intl.dart';
+import 'package:units/dreams/views/dreams_diary.dart';
 import 'dreams/views/dreams_component.dart';
 import 'dreams/presenter/dreams_presenter.dart';
 import 'dreams/views/dreams_input.dart';
+import 'dreams/views/dreams_diary.dart';
 import 'dreams/views/dreams_healthy_habits.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'dreams/views/dreams_output.dart';
@@ -12,6 +14,7 @@ import 'dreams/views/dreams_videos.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'dreams/utils/dreams_callback_typedefs.dart';
+import 'dreams/views/dreams_settings.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -135,10 +138,29 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+
+  static _MyAppState of(BuildContext context) =>
+      context.findAncestorStateOfType<_MyAppState>()!;
+}
+
+class _MyAppState extends State<MyApp> {
+
   // This widget is the root of your application.
+  ThemeMode _themeMode = ThemeMode.system;
+
+  // dark mode method taken from
+  // https://stackoverflow.com/questions/60232070/how-to-implement-dark-mode-and-light-mode-in-flutter
+  void changeTheme(ThemeMode newMode) {
+    setState(() {
+      _themeMode = newMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -237,7 +259,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
               ),
-              themeMode: ThemeMode.system,
+              themeMode: _themeMode,
               home: const MyHomePage(title: 'Sweet Dreams'),
             );
           }
@@ -331,7 +353,22 @@ class HamburgerDir extends StatelessWidget {
           ListTile(title: Text('Update MOTD', style: Theme.of(context).textTheme.button),
               onTap: (){
             LoginBox(context);
+            }),
+          ListTile(title: Text('Daily Diary'), onTap: (){
+            Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return DiaryScreen();
+                    }));
           }),
+          ListTile(title: Text('Settings', style: Theme.of(context).textTheme.button),
+              onTap: (){
+                Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return SettingsPage(title: 'settings', key: Key("settings"));
+                        }));
+              }),
         ],
       ),
     );

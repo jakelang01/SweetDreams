@@ -1,3 +1,5 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../views/dreams_view.dart';
@@ -178,23 +180,33 @@ class BasicPresenter implements UNITSPresenter{
 }
 class RecordNewNight implements UNITSViewModel{
 //total sleep might need to be formatted differently
+  final databaseReference = FirebaseFirestore.instance.collection('Example User');
+
   void createNight(int count, String bedtime, int quality, String wakeUp, String description){
-  databaseReference.doc("Night " + count.toString()).set({"Bedtime": bedtime, "Quality of Sleep (1-5)": quality,
+  databaseReference.doc("Night" + count.toString()).set({"Bedtime": bedtime, "Quality of Sleep (1-5)": quality,
       "Total Sleep": calculateSleep(bedtime, wakeUp).toString(), "Wake-Up Time": wakeUp, "Description": description});
   }
 
-  Future<void> getNight(String day) async {
-    DocumentSnapshot data = await retrieveData(day);
+  Future<void> getNight(String night) async {
+    DocumentSnapshot data = await retrieveData(night);
     print(data.data().toString());
   }
 
-  Future<DocumentSnapshot> retrieveData(String day) async{
-    return databaseReference.doc("Night " + day).get();
+  Future<DocumentSnapshot> retrieveData(String night) async{
+    return databaseReference.doc(night).get();
   }
 
-  void removeNight(int day){
-    databaseReference.doc("Night " + day.toString()).delete();
+  void removeNight(int night) async {
+    databaseReference.doc("Night" + night.toString()).delete();
   }
+
+  Future<String> getBedtime(String night) async {
+    String nightDoc = night;
+    DocumentSnapshot data =  await databaseReference.doc(nightDoc).get();
+    String nightNumber = data.get('Bedtime');
+    return Future.value(nightNumber);
+  }
+
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
