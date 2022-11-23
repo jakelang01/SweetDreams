@@ -11,6 +11,7 @@ import 'dreams/views/dreams_output.dart';
 import 'dreams/views/dreams_videos.dart';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
+import 'dreams/utils/dreams_callback_typedefs.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -77,8 +78,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           )
       ),
-      drawer: HamburgerDir(),
+      drawer: HamburgerDir(
+        onCorrectAdminLogin: callbackToUpdateMOTD,
+      ),
     );
+  }
+
+  void callbackToUpdateMOTD() {
+    _updateMOTDDialogue();
   }
 
   Future<void> getMOTD() async {
@@ -125,22 +132,6 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       }
     );
-  }
-
-  // method to check password taken from https://stackoverflow.com/questions/56186457/how-to-hash-value-in-flutter-using-sha256
-  Future<bool> checkAdminPassword(String password) async {
-    // constant salt for now - vary based on username?
-    var saltValue = 'sleepyTime';
-    // utf8 representation of string
-    var localSaltedPasswordBytes = utf8.encode(password + saltValue);
-    // hashed string
-    var localSaltedPasswordDigest = sha256.convert(localSaltedPasswordBytes);
-    // hashed password in database
-    var data =  await messageDB.doc("Account").get();
-    var databasePassword = data.get("password");
-    if (localSaltedPasswordDigest == databasePassword)
-      return true;
-    return false;
   }
 }
 
@@ -282,55 +273,12 @@ class _HealthyHabitsScreen extends State<HealthyHabitsScreen> {
 }
 
 class HamburgerDir extends StatelessWidget {
-  TextEditingController username = TextEditingController();
-  TextEditingController password = TextEditingController();
 
-  @override
-  Future<void> LoginBox(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Log In:'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  child: TextField(
-                    controller: username,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Username',
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  child: TextField(
-                    controller: password,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            ElevatedButton(
-              child: const Text('Sign In'),
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // method for flutter data binding taken from: https://medium.com/flutter-community/data-binding-in-flutter-or-passing-data-from-a-child-widget-to-a-parent-widget-4b1c5ffe2114
+  final Callback onCorrectAdminLogin;
+  HamburgerDir({required this.onCorrectAdminLogin});
+
+  final adminDB = FirebaseFirestore.instance.collection('Admin');
 
   @override
   Widget build(BuildContext context) {
@@ -394,4 +342,77 @@ class HamburgerDir extends StatelessWidget {
       builder: (context) => page,
     ));
   }
+
+  Future<void> LoginBox(BuildContext context) async {
+    TextEditingController username = TextEditingController();
+    TextEditingController password = TextEditingController();
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Log In:'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: TextField(
+                    controller: username,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Username',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: TextField(
+                    controller: password,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Password',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text('Sign In'),
+              onPressed: () async {
+                bool pass = await checkAdminPassword(username.value.text, password.value.text);
+                Navigator.of(context).pop(false);
+                if (pass){
+                  onCorrectAdminLogin();
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // method to check password taken from https://stackoverflow.com/questions/56186457/how-to-hash-value-in-flutter-using-sha256
+  Future<bool> checkAdminPassword(String username, String password) async {
+    var saltValue = username.length > 0 ? username : '';
+    // utf8 representation of string
+    //print(password + saltValue);
+    var localSaltedPasswordBytes = utf8.encode(password + saltValue);
+    // hashed string
+    var localSaltedPasswordDigest = sha256.convert(localSaltedPasswordBytes);
+    //print(localSaltedPasswordDigest);
+    // hashed password in database
+    var data = await adminDB.doc("Account").get();
+    var databasePassword = data.get("password");
+    //print(databasePassword);
+    if (localSaltedPasswordDigest.toString() == databasePassword) {
+      return true;
+    }
+    return false;
+  }
+
 }
