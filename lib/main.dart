@@ -44,13 +44,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sweet Dreams"),
+        title: Text("Chamomile"),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
           child: ListView(
             children: <Widget>[
-              Text("Sweet Dreams!",
+              Padding(
+                padding: EdgeInsets.only(bottom: 7.0),
+              ),
+              Text("Lets Help You Sleep",
                 style: Theme
                     .of(context)
                     .textTheme
@@ -186,8 +189,9 @@ class _MyAppState extends State<MyApp> {
                 fontFamily: 'Roboto',
                 textTheme: const TextTheme(
                   headline1: TextStyle(
-                    fontSize: 48.0,
+                    fontSize: 40.0,
                     fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
                     color: Colors.deepPurpleAccent,
                   ),
                   headline2: TextStyle(
@@ -233,8 +237,9 @@ class _MyAppState extends State<MyApp> {
                 fontFamily: 'Roboto',
                 textTheme: TextTheme(
                   headline1: TextStyle(
-                    fontSize: 48.0,
+                    fontSize: 40.0,
                     fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
                     color: Colors.deepPurpleAccent,
                   ),
                   headline2: TextStyle(
