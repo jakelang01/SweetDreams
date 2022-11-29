@@ -354,7 +354,7 @@ class HamburgerDir extends StatelessWidget {
               onTap: (){
             LoginBox(context);
             }),
-          ListTile(title: Text('Daily Diary'), onTap: (){
+          ListTile(title: Text('Daily Diary', style: Theme.of(context).textTheme.button), onTap: (){
             Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (BuildContext context) {

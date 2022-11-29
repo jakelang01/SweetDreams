@@ -15,13 +15,13 @@ class _DiaryScreen extends State<DiaryScreen> {
   //text controllers
   TextEditingController dailyEntry = TextEditingController();
 
-  void calcCaff(String dropValue){
+  /* void calcCaff(String dropValue){
     switch(dropValue){
       case: 'Coffee'{
 
       };
     }
-  }
+  } */
 
   @override
   void initState() {
@@ -31,6 +31,7 @@ class _DiaryScreen extends State<DiaryScreen> {
   @override
   Widget build(BuildContext build){
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -41,14 +42,14 @@ class _DiaryScreen extends State<DiaryScreen> {
       ),
       body: Column(
         children: <Widget>[
-          const Padding(
+          Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: Text(
                 'Tell Us About Your Day',
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                textScaleFactor: 1.5,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                // textScaleFactor: 1.5,
+                style: Theme.of(context).textTheme.headline2
               ),
           ),
           Padding(
@@ -67,8 +68,8 @@ class _DiaryScreen extends State<DiaryScreen> {
               'What kind of caffeine did you consume?',
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: 1.5,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              textScaleFactor: 0.9,
+              style: Theme.of(context).textTheme.headline2,
             ),
           ),
           Padding(
