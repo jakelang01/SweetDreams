@@ -180,8 +180,8 @@ class _MyAppState extends State<MyApp> {
                 backgroundColor: Colors.white,
                 canvasColor: Colors.grey.shade300,
                 unselectedWidgetColor: Colors.black,
-                dividerColor: Colors.white,
-                scaffoldBackgroundColor: Colors.deepPurpleAccent,
+                dividerColor: Colors.black87,
+                scaffoldBackgroundColor: Colors.grey.shade300,
 
                 fontFamily: 'Roboto',
                 textTheme: const TextTheme(
@@ -198,6 +198,10 @@ class _MyAppState extends State<MyApp> {
                   headline3: TextStyle(
                     fontSize: 24.0,
                     color: Colors.white,
+                  ),
+                  headline4: TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.black87,
                   ),
                   bodyText1: TextStyle(
                     fontSize: 18.0,
@@ -224,7 +228,7 @@ class _MyAppState extends State<MyApp> {
                 canvasColor: Colors.grey.shade900,
                 unselectedWidgetColor: Colors.white70,
                 dividerColor: Colors.deepPurpleAccent,
-                scaffoldBackgroundColor: Colors.grey.shade900,
+                scaffoldBackgroundColor: Colors.grey.shade100,
 
                 fontFamily: 'Roboto',
                 textTheme: TextTheme(
@@ -241,6 +245,10 @@ class _MyAppState extends State<MyApp> {
                   headline3: TextStyle(
                     fontSize: 24.0,
                     color: Colors.deepPurpleAccent,
+                  ),
+                  headline4: TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.deepPurple,
                   ),
                   bodyText1: TextStyle(
                     fontSize: 16.0,
@@ -354,9 +362,10 @@ class HamburgerDir extends StatelessWidget {
               onTap: (){
             LoginBox(context);
             }),
-          ListTile(title: Text('Daily Diary'), onTap: (){
-            Navigator.of(context).push(
-                MaterialPageRoute(
+          ListTile(title: Text('Daily Diary', style: Theme.of(context).textTheme.button),
+              onTap: (){
+                Navigator.of(context).push(
+                  MaterialPageRoute(
                     builder: (BuildContext context) {
                       return DiaryScreen();
                     }));
