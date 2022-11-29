@@ -207,6 +207,34 @@ class RecordNewNight implements UNITSViewModel{
     return Future.value(nightNumber);
   }
 
+  Future<String> getDescription(String night) async {
+    String nightDoc = night;
+    DocumentSnapshot data =  await databaseReference.doc(nightDoc).get();
+    String nightNumber = data.get('Description');
+    return Future.value(nightNumber);
+  }
+
+  Future<int> getQuality(String night) async {
+    String nightDoc = night;
+    DocumentSnapshot data =  await databaseReference.doc(nightDoc).get();
+    int nightNumber = data.get('Quality of Sleep (1-5)');
+    return Future.value(nightNumber);
+  }
+
+  Future<String> getTotalSleep(String night) async {
+    String nightDoc = night;
+    DocumentSnapshot data =  await databaseReference.doc(nightDoc).get();
+    String nightNumber = data.get('Total Sleep');
+    return Future.value(nightNumber);
+  }
+
+  Future<String> getWakeUp(String night) async {
+    String nightDoc = night;
+    DocumentSnapshot data =  await databaseReference.doc(nightDoc).get();
+    String nightNumber = data.get('Wake-Up Time');
+    return Future.value(nightNumber);
+  }
+
 
   @override
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);

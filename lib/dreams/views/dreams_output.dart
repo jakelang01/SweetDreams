@@ -8,6 +8,10 @@ List<String> list = <String>['Night1', 'Night2', 'Night3', 'Night4'];
 String _dropdownValue1 = list.first;
 String _dropdownValue2 = list.last;
 String bedTime1 = 'no value';
+String description1 = 'empty';
+int quality1 = 0;
+String totalSleep1 = 'nothing';
+String wakeUp1 = 'something';
 
 class SleepOutput extends StatefulWidget {
 
@@ -60,6 +64,28 @@ class _OutputScreen extends State<OutputScreen> {
     bedTime1 = await bedFuture;
   }
 
+  void getTheDescription(String nightNumber) async {
+    Future<String> bedFuture = night.getDescription(nightNumber);
+    description1 = await bedFuture;
+  }
+
+  void getTheQuality(String nightNumber) async {
+    Future<int> bedFuture = night.getQuality(nightNumber);
+    quality1 = await bedFuture;
+  }
+
+  void getTheTotalSleep(String nightNumber) async {
+    Future<String> bedFuture = night.getTotalSleep(nightNumber);
+    totalSleep1 = await bedFuture;
+  }
+
+  void getTheWakeUp(String nightNumber) async {
+    Future<String> bedFuture = night.getWakeUp(nightNumber);
+    wakeUp1 = await bedFuture;
+  }
+
+
+
 
   @override
   void initState() {
@@ -90,14 +116,18 @@ class _OutputScreen extends State<OutputScreen> {
                   alignment: AlignmentDirectional.center,
                   onChanged: (String? newValue) {
                     setState(() {
-                      getTheBedTime(_dropdownValue1);
                       _dropdownValue1 = newValue!;
-
+                      getTheDescription(_dropdownValue1);
+                      getTheBedTime(_dropdownValue1);
+                      getTheQuality(_dropdownValue1);
+                      getTheTotalSleep(_dropdownValue1);
+                      getTheWakeUp(_dropdownValue1);
                     });
                   }),
             Expanded(
               child: Text(
-                bedTime1 + _dropdownValue1,
+                bedTime1 + " " + description1 + " " + quality1.toString()
+                + " " + totalSleep1 + ' ' + wakeUp1,
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.visible,
                 textScaleFactor: 1,
