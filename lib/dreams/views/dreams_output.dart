@@ -28,9 +28,9 @@ class _SleepOutputPageState extends State<SleepOutput> {
         appBar: AppBar(
           title: Text('See previous Night\'s Sleep Data'),
           centerTitle: true,
-          backgroundColor: Colors.blueAccent.shade700,
+          //backgroundColor: Colors.blueAccent.shade700,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: ListView(
           children: <Widget>[
             Padding(padding: EdgeInsets.all(5.0)),
@@ -72,9 +72,9 @@ class _OutputScreen extends State<OutputScreen> {
         appBar: AppBar(
           title: Text('See Previous Night\'s Sleep Data'),
           centerTitle: true,
-          backgroundColor: Colors.blueAccent.shade700,
+          //backgroundColor: Colors.blueAccent.shade700,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Column(
                 children:<Widget>[
                 DropdownButton(
@@ -101,7 +101,7 @@ class _OutputScreen extends State<OutputScreen> {
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.visible,
                 textScaleFactor: 1,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headline2,
               ),
             )
                 ]

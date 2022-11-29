@@ -5,27 +5,63 @@ import '../views/dreams_view.dart';
 import '../presenter/dreams_presenter.dart';
 import 'package:intl/intl.dart';
 
+typedef void CaffCallback(int c);
+
 class DiaryScreen extends StatefulWidget {
+  //const DiaryScreen({Key key, required this.caffKey}) : super(key: key);
+  //final int caffKey;
+
   @override
   _DiaryScreen createState() => _DiaryScreen();
 }
+
+String caffDrop = '';
 
 class _DiaryScreen extends State<DiaryScreen> {
 
   //text controllers
   TextEditingController dailyEntry = TextEditingController();
 
-  void calcCaff(String dropValue){
-    switch(dropValue){
-      case: 'Coffee'{
-
-      };
-    }
-  }
+  int dailyCaf = 0;
+  //late int localCaf;
 
   @override
   void initState() {
+    //localCaf = widget.caffKey;
     super.initState();
+  }
+
+  /*final CaffCallback onChanged;
+  _DiaryScreen({required this.onChanged});
+  onChanged: (int updCaff){
+  updateCaff(updCaff)
+  }
+  void updateCaff(int up){
+    setState(() {
+      up = dailyCaf;
+    });
+  }*/
+
+  void calcCaff(String dropValue){
+    switch(dropValue){
+      case 'Coffee':{
+        dailyCaf += 95;
+      }
+      break;
+      case 'Espresso':{
+        dailyCaf += 64;
+      }
+      break;
+      case 'Monster':{
+        dailyCaf += 160;
+      }
+      break;
+      case 'Redbull':{
+        dailyCaf += 111;
+      }
+      break;
+      default: break;
+    }
   }
 
   @override
@@ -39,6 +75,7 @@ class _DiaryScreen extends State<DiaryScreen> {
         title: Text("Daily Diary"),
         actions: <Widget>[],
       ),
+      backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
           const Padding(
@@ -67,7 +104,7 @@ class _DiaryScreen extends State<DiaryScreen> {
               'What kind of caffeine did you consume?',
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
-              textScaleFactor: 1.5,
+              textScaleFactor: 1,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
@@ -76,17 +113,29 @@ class _DiaryScreen extends State<DiaryScreen> {
             child: CaffeineMenu(),
           ),
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child:ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple
-                ),
-                child: Text('Confirm'),
-                onPressed: () {
-                  //_confirmedBox();
-                  //calcCaff();
-                },
-              )
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.deepPurple
+              ),
+              child: Text('Confirm'),
+              onPressed: () {
+                calcCaff(caffDrop);
+                setState(() {
+                  Object redrawObject = Object();
+                });
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            child: Text(
+              'Total Caffeine Today: $dailyCaf',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              textScaleFactor: 1.5,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            )
           )
         ],
       ),
@@ -124,6 +173,7 @@ class _CaffeineMenu extends State<CaffeineMenu> {
         // This is called when the user selects an item.
         setState(() {
           dropdownValue = value!;
+          caffDrop = dropdownValue;
         });
       },
       items: list.map<DropdownMenuItem<String>>((String value) {
