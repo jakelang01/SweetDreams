@@ -114,7 +114,7 @@ class _HealthyHabitsPageState extends State<HealthyHabits> {
                ),
                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                child: Text(
-                 'Whatever sleep habit I also have to add idk yet',
+                 'Its easier to fall asleep in a dark environment, so make sure you turn off those lights!',
                     style: Theme.of(context).textTheme.headline4,
                     //maxLines: 3,
                ),
