@@ -251,8 +251,8 @@ double calculateSleep(String bed, String wake){
 
   double bedtime = bedHour + bedMinute;
   double wakeup = wakeHour + wakeMinute;
-  if(bedtime <= 12){
-    double total = 12-bedtime+wakeup;
+  if(bedtime >= 12){
+    double total = 24-bedtime+wakeup;
     return total;
     }else{
       double total = wakeup-bedtime;
