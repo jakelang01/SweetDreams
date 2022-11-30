@@ -90,169 +90,170 @@ class _InputScreen extends State<InputScreen> {
         actions: <Widget>[],
       ),
       backgroundColor: Theme.of(context).backgroundColor,
-      body: ListView(
-        children: <Widget>[
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: Text(
-                'How was your sleep?',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                textScaleFactor: 1.3,
-                style: Theme.of(context).textTheme.headline2,
-              )
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            child: TextFormField(
-              controller: userDescription,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
-                labelText: 'Tell us about your sleep here',
-                labelStyle: Theme.of(context).textTheme.bodyText2,
-                floatingLabelStyle: Theme.of(context).textTheme.bodyText1
-                //minLines: 1,
-                //maxLines: null,
+      body: Container(
+        margin: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 60.0),
+        color: Theme.of(context).canvasColor,
+        child: ListView(
+          children: <Widget>[
+            Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: Text(
+                  'How was your sleep?',
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  textScaleFactor: 1.3,
+                  style: Theme.of(context).textTheme.headline2,
+                )
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child: TextFormField(
+                controller: userDescription,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
+                  labelText: 'Tell us about your sleep here',
+                  labelStyle: Theme.of(context).textTheme.bodyText2,
+                  floatingLabelStyle: Theme.of(context).textTheme.bodyText1
+                  //minLines: 1,
+                  //maxLines: null,
+                ),
               ),
             ),
-          ),
-          Padding(
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: Text(
+                  'Rate your sleep 1-5 Stars',
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  textScaleFactor: 0.9,
+                  style: Theme.of(context).textTheme.headline2,
+                )
+            ),
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              child: Text(
-                'Rate your sleep 1-5 Stars',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                textScaleFactor: 0.9,
-                style: Theme.of(context).textTheme.headline2,
-              )
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            child: Container(
-              alignment: Alignment.center,
-              child: RatingBarIndicator(
-                rating: _userRating,
-                itemBuilder: (context, index) => Icon(
-                  _selectedIcon ?? Icons.star,
-                  color: Colors.amber,
+              child: Container(
+                alignment: Alignment.center,
+                child: RatingBarIndicator(
+                  rating: _userRating,
+                  itemBuilder: (context, index) => Icon(
+                    _selectedIcon ?? Icons.star,
+                    color: Colors.amber,
+                  ),
+                  itemCount: 5,
+                  itemSize: 50.0,
+                  unratedColor: Colors.amber.withAlpha(50),
+                  direction: _isVertical ? Axis.vertical : Axis.horizontal,
                 ),
-                itemCount: 5,
-                itemSize: 50.0,
-                unratedColor: Colors.amber.withAlpha(50),
-                direction: _isVertical ? Axis.vertical : Axis.horizontal,
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              child:Text(
-                'When did you fall asleep?',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                textScaleFactor: 0.9,
-                style: Theme.of(context).textTheme.headline2,
-              )
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              child:TextField(
-                controller: wentToSleep, //editing controller of this TextField
-                decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
-                    icon: Icon(Icons.timer), //icon of text field
-                    labelText: "Went To Sleep At",
-                    labelStyle: Theme.of(context).textTheme.bodyText2,
-                    floatingLabelStyle: Theme.of(context).textTheme.bodyText1,//label text of field
-                ),
-                readOnly: true,  //set it true, so that user will not able to edit text
-                onTap: () async {
-                  TimeOfDay? pickedTime =  await showTimePicker(
-                    initialTime: TimeOfDay.now(),
-                    context: context,
-                  );
-                  if(pickedTime != null ){
-                    print(pickedTime.format(context));   //output 10:51 PM
-                    DateTime parsedTime = DateFormat.jm().parse(pickedTime.format(context).toString());
-                    //converting to DateTime so that we can further format on different pattern.
-                    print(parsedTime); //output 1970-01-01 22:53:00.000
-                    String formattedTime = DateFormat('HH:mm').format(parsedTime);
-                    print(formattedTime); //output 14:59
-                    //DateFormat() is from intl package, you can format the time on any pattern you need.
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child:Text(
+                  'When did you fall asleep?',
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  textScaleFactor: 0.9,
+                  style: Theme.of(context).textTheme.headline2,
+                )
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child:TextField(
+                  controller: wentToSleep, //editing controller of this TextField
+                  decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
+                      icon: Icon(Icons.timer), //icon of text field
+                      labelText: "Went To Sleep At",
+                      labelStyle: Theme.of(context).textTheme.bodyText2,
+                      floatingLabelStyle: Theme.of(context).textTheme.bodyText1,//label text of field
+                  ),
+                  readOnly: true,  //set it true, so that user will not able to edit text
+                  onTap: () async {
+                    TimeOfDay? pickedTime =  await showTimePicker(
+                      initialTime: TimeOfDay.now(),
+                      context: context,
+                    );
+                    if(pickedTime != null ){
+                      print(pickedTime.format(context));   //output 10:51 PM
+                      DateTime parsedTime = DateFormat.jm().parse(pickedTime.format(context).toString());
+                      //converting to DateTime so that we can further format on different pattern.
+                      print(parsedTime); //output 1970-01-01 22:53:00.000
+                      String formattedTime = DateFormat('HH:mm').format(parsedTime);
+                      print(formattedTime); //output 14:59
+                      //DateFormat() is from intl package, you can format the time on any pattern you need.
 
-                    setState(() {
-                      wentToSleep.text = formattedTime; //set the value of text field.
-                    });
-                  }
-                  else{
-                    print("Time is not selected");
-                  }
+                      setState(() {
+                        wentToSleep.text = formattedTime; //set the value of text field.
+                      });
+                    }
+                    else{
+                      print("Time is not selected");
+                    }
+                  },
+                )
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child:Text(
+                  'And when did you wake up?',
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  textScaleFactor: 0.9,
+                  style: Theme.of(context).textTheme.headline2,
+                )
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child:TextField(
+                  controller: wokeUp, //editing controller of this TextField
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.timer), //icon of text field
+                      labelText: "Woke Up At" , //label text of field
+                      enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
+                      labelStyle: Theme.of(context).textTheme.bodyText2,
+                      floatingLabelStyle: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  readOnly: true,  //set it true, so that user will not able to edit text
+                  onTap: () async {
+                    TimeOfDay? pickedTime =  await showTimePicker(
+                      initialTime: TimeOfDay.now(),
+                      context: context,
+                    );
+                    if(pickedTime != null ){
+                      print(pickedTime.format(context));   //output 10:51 PM
+                      DateTime parsedTime = DateFormat.jm().parse(pickedTime.format(context).toString());
+                      //converting to DateTime so that we can further format on different pattern.
+                      print(parsedTime); //output 1970-01-01 22:53:00.000
+                      String formattedTime = DateFormat('HH:mm').format(parsedTime);
+                      print(formattedTime); //output 14:59
+                      //DateFormat() is from intl package, you can format the time on any pattern you need.
+
+                      setState(() {
+                        wokeUp.text = formattedTime; //set the value of text field.
+                      });
+                    }
+                    else{
+                      print("Time is not selected");
+                    }
+                  },
+                )
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
+              child:ElevatedButton(
+                child: Text('Submit'),
+                onPressed: () {
+                  _confirmedBox();
+                  handleNewDay(wentToSleep.text, _userRating.toInt(), wokeUp.text, userDescription.text);
+                  wentToSleep.dispose();
+                  wokeUp.dispose();
+                  userDescription.dispose();
+                  //Navigator.of(context).popUntil((route) => false);
                 },
               )
-          ),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              child:Text(
-                'And when did you wake up?',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                textScaleFactor: 0.9,
-                style: Theme.of(context).textTheme.headline2,
-              )
-          ),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              child:TextField(
-                controller: wokeUp, //editing controller of this TextField
-                decoration: InputDecoration(
-                    icon: Icon(Icons.timer), //icon of text field
-                    labelText: "Woke Up At" , //label text of field
-                    enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
-                    labelStyle: Theme.of(context).textTheme.bodyText2,
-                    floatingLabelStyle: Theme.of(context).textTheme.bodyText1,
-                ),
-                readOnly: true,  //set it true, so that user will not able to edit text
-                onTap: () async {
-                  TimeOfDay? pickedTime =  await showTimePicker(
-                    initialTime: TimeOfDay.now(),
-                    context: context,
-                  );
-                  if(pickedTime != null ){
-                    print(pickedTime.format(context));   //output 10:51 PM
-                    DateTime parsedTime = DateFormat.jm().parse(pickedTime.format(context).toString());
-                    //converting to DateTime so that we can further format on different pattern.
-                    print(parsedTime); //output 1970-01-01 22:53:00.000
-                    String formattedTime = DateFormat('HH:mm').format(parsedTime);
-                    print(formattedTime); //output 14:59
-                    //DateFormat() is from intl package, you can format the time on any pattern you need.
-
-                    setState(() {
-                      wokeUp.text = formattedTime; //set the value of text field.
-                    });
-                  }
-                  else{
-                    print("Time is not selected");
-                  }
-                },
-              )
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child:ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple
-              ),
-              child: Text('Submit'),
-              onPressed: () {
-                _confirmedBox();
-                handleNewDay(wentToSleep.text, _userRating.toInt(), wokeUp.text, userDescription.text);
-                wentToSleep.dispose();
-                wokeUp.dispose();
-                userDescription.dispose();
-                //Navigator.of(context).popUntil((route) => false);
-              },
             )
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
