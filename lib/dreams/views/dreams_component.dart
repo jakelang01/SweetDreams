@@ -230,7 +230,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
           centerTitle: true,
         ),
         backgroundColor: Theme.of(context).backgroundColor,
-        body: Column(
+        body: ListView(
           children: <Widget>[
             Padding(padding: EdgeInsets.all(5.0)),
             _mainPartView,

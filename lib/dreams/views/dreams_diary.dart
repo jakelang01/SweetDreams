@@ -66,7 +66,7 @@ class _DiaryScreen extends State<DiaryScreen> {
         actions: <Widget>[],
       ),
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Column(
+      body: ListView(
         children: <Widget>[
           const Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
