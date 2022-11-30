@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: EdgeInsets.only(bottom: 7.0),
               ),
-              Text("Lets Help You Sleep",
+              Text("Let Us\n Help You Sleep",
                 style: Theme
                     .of(context)
                     .textTheme
@@ -177,14 +177,15 @@ class _MyAppState extends State<MyApp> {
             return MaterialApp(
               title: 'Sweet Dreams',
               theme: ThemeData(
-                colorScheme: ColorScheme.fromSwatch(
-                    primarySwatch: Colors.deepPurple
+                colorScheme: ColorScheme.fromSeed(
+                    seedColor: Color(0xFFD8CCD9),
                 ),
-                backgroundColor: Colors.white,
-                canvasColor: Colors.grey.shade300,
-                unselectedWidgetColor: Colors.black,
-                dividerColor: Colors.black87,
-                scaffoldBackgroundColor: Colors.grey.shade300,
+                primaryColor: Color(0xFFCDBDCE),
+                backgroundColor: Color(0xFFFFE683),
+                canvasColor: Color(0xFFFBF5D0),
+                //unselectedWidgetColor: Colors.black,
+                //dividerColor: Colors.black87,
+                scaffoldBackgroundColor: Color(0xFFFBF5D0),
 
                 fontFamily: 'Roboto',
                 textTheme: const TextTheme(
@@ -192,12 +193,12 @@ class _MyAppState extends State<MyApp> {
                     fontSize: 40.0,
                     fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic,
-                    color: Colors.deepPurpleAccent,
+                    color: Color(0xFF947FA2),
                   ),
                   headline2: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: Color(0xFF4A444D),
                   ),
                   headline3: TextStyle(
                     fontSize: 24.0,
@@ -205,22 +206,23 @@ class _MyAppState extends State<MyApp> {
                   ),
                   headline4: TextStyle(
                     fontSize: 24.0,
-                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF4A444D),
                   ),
                   bodyText1: TextStyle(
                     fontSize: 18.0,
                     fontStyle: FontStyle.italic,
-                    color: Colors.deepPurpleAccent,
+                    color: Color(0xFF947FA2),
                   ),
                   bodyText2: TextStyle(
                     fontSize: 18.0,
                     //fontStyle: FontStyle.italic,
-                    color: Colors.black45,
+                    color: Color(0xFF4A444D),
                   ),
                   button: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.deepPurpleAccent,
+                    color: Color(0xFF4A444D),
                   ),
                 ),
               ),
