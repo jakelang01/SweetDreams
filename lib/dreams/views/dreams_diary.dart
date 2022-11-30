@@ -136,7 +136,16 @@ class _DiaryScreen extends State<DiaryScreen> {
               textScaleFactor: 1.5,
               style: const TextStyle(fontWeight: FontWeight.bold),
             )
-          )
+          ),
+          Container(
+            height: 245,
+            width: 500,
+            alignment: Alignment.bottomRight,
+            child:
+            Image.asset('assets/images/sleepycow1.png',
+              fit: BoxFit.fill,
+            ),
+          ),
         ],
       ),
     );

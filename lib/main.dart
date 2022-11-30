@@ -78,6 +78,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ])
               ),
+              Container(
+                height: 600,
+                width: 800,
+                alignment: Alignment.center,
+                child:
+                  Image.asset('assets/images/sleepycow2.png',
+                  fit: BoxFit.cover,
+                  ),
+              ),
               Padding(
                 padding: EdgeInsets.only(bottom: 15.0),
               ),

@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
       color: Theme.of(context).canvasColor,
       margin: EdgeInsets.all(8.0),
       padding: EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
+       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Column(
@@ -205,7 +205,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
             ],
           ),
         ),
-      ),
+     ),
     );
 
     var _resultView = Column(
@@ -230,14 +230,23 @@ class _HomePageState extends State<HomePage> implements UNITSView {
           centerTitle: true,
         ),
         backgroundColor: Theme.of(context).backgroundColor,
-        body: ListView(
+        body: Column(
           children: <Widget>[
             Padding(padding: EdgeInsets.all(5.0)),
             _mainPartView,
             Padding(padding: EdgeInsets.all(5.0)),
-            _resultView
+            _resultView,
+            Container(
+              height: 244,
+              width: 600,
+              alignment: Alignment.topCenter,
+              child:
+              Image.asset('assets/images/sleepycow3.png',
+                fit: BoxFit.fill,
+              ),
+            ),
           ],
-        )
+        ),
     );
   }
 
