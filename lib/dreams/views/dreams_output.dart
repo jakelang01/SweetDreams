@@ -12,44 +12,8 @@ String description1 = 'empty';
 int quality1 = 0;
 String totalSleep1 = 'nothing';
 String wakeUp1 = 'something';
+final databaseReference = FirebaseFirestore.instance.collection("Example User");
 
-class SleepOutput extends StatefulWidget {
-
-  SleepOutput({required Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _SleepOutputPageState createState() => _SleepOutputPageState();
-}
-
-class _SleepOutputPageState extends State<SleepOutput> {
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('See previous Night\'s Sleep Data'),
-          centerTitle: true,
-          //backgroundColor: Colors.blueAccent.shade700,
-        ),
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: ListView(
-          children: <Widget>[
-            Padding(padding: EdgeInsets.all(5.0)),
-            Text("Do stuff here"),
-            Padding(padding: EdgeInsets.all(5.0)),
-          ],
-        )
-    );
-  }
-
-  _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);
-  }
-}
 class OutputScreen extends StatefulWidget {
   @override
   _OutputScreen createState() => _OutputScreen();
@@ -58,6 +22,15 @@ class OutputScreen extends StatefulWidget {
 class _OutputScreen extends State<OutputScreen> {
 
   RecordNewNight night = new RecordNewNight();
+  TextEditingController userInput = TextEditingController();
+
+  void setData(String number) {
+    getTheBedTime(number);
+    getTheDescription(number);
+    getTheQuality(number);
+    getTheTotalSleep(number);
+    getTheWakeUp(number);
+  }
 
   void getTheBedTime(String nightNumber) async {
     Future<String> bedFuture = night.getBedtime(nightNumber);
@@ -84,9 +57,6 @@ class _OutputScreen extends State<OutputScreen> {
     wakeUp1 = await bedFuture;
   }
 
-
-
-
   @override
   void initState() {
     super.initState();
@@ -98,63 +68,47 @@ class _OutputScreen extends State<OutputScreen> {
         appBar: AppBar(
           title: Text('See Previous Night\'s Sleep Data'),
           centerTitle: true,
-          //backgroundColor: Colors.blueAccent.shade700,
+          backgroundColor: Colors.deepPurple,
         ),
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Colors.white,
         body: Column(
                 children:<Widget>[
-                DropdownButton(
-                    dropdownColor: Colors.deepPurple,
-                    borderRadius: BorderRadius.circular(.5),
-                    items: list.map((location){
-                      return DropdownMenuItem(
-                        child: new Text(location),
-                        value: location,
-                    );
-                  }).toList(),
-                  value: _dropdownValue1,
-                  alignment: AlignmentDirectional.center,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      _dropdownValue1 = newValue!;
-                      getTheDescription(_dropdownValue1);
-                      getTheBedTime(_dropdownValue1);
-                      getTheQuality(_dropdownValue1);
-                      getTheTotalSleep(_dropdownValue1);
-                      getTheWakeUp(_dropdownValue1);
-                    });
-                  }),
-            Expanded(
-              child: Text(
-                bedTime1 + " " + description1 + " " + quality1.toString()
-                + " " + totalSleep1 + ' ' + wakeUp1,
-                textAlign: TextAlign.left,
-                overflow: TextOverflow.visible,
-                textScaleFactor: 1,
-                style: Theme.of(context).textTheme.headline2,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child: TextFormField(
+                controller: userInput,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).unselectedWidgetColor)),
+                  labelText: 'Number of night you want to view',
+                  labelStyle: Theme.of(context).textTheme.bodyText2,
+                  floatingLabelStyle: Theme.of(context).textTheme.bodyText1
+                  //minLines: 1,
+                  //maxLines: null,
+                ),
               ),
-            )
+            ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: Text("Night" + userInput.text + " " + quality1.toString() + " " + bedTime1,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      textScaleFactor: 0.9,
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                      child:ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.deepPurple
+                        ),
+                        child: Text('Submit'),
+                        onPressed: () => getTheBedTime("Night" + userInput.text)
+                      )
+                  ),
                 ]
         )
     );
   }
 }
-
-//for the database reference need future builder
-// Expanded(
-// child: FutureBuilder<String>(
-// future: getTheBedtime(_dropdownValue1),
-// builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-// if (snapshot.hasData) {
-// Padding(
-// padding: const EdgeInsets.only(top: 16),
-// child: Text('Result: ${snapshot.data}'),
-// );
-// }
-// return Scaffold(
-// body: Text("this is text"),
-// );
-// })
-// )
-
 
