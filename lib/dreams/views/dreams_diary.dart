@@ -160,7 +160,16 @@ class _DiaryScreen extends State<DiaryScreen> {
                 labelText: "Tell us here!",
               ),
             ),
-          )
+          ),
+          Container(
+            height: 155.9,
+            width: 500,
+            alignment: Alignment.bottomRight,
+            child:
+            Image.asset('assets/images/sleepycow1.png',
+              fit: BoxFit.fill,
+            ),
+          ),
         ],
       ),
     );

@@ -237,7 +237,7 @@ class _HomePageState extends State<HomePage> implements UNITSView {
             Padding(padding: EdgeInsets.all(5.0)),
             _resultView,
             Container(
-              height: 244,
+              height: 227,
               width: 600,
               alignment: Alignment.topCenter,
               child:
