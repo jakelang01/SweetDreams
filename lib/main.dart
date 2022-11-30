@@ -28,6 +28,9 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+
+  static _MyHomePageState of(BuildContext context) =>
+      context.findAncestorStateOfType<_MyHomePageState>()!;
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -84,14 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           )
       ),
-      drawer: HamburgerDir(
-        onCorrectAdminLogin: callbackToUpdateMOTD,
-      ),
+      drawer: HamburgerDir(),
     );
-  }
-
-  void callbackToUpdateMOTD() {
-    _updateMOTDDialogue();
   }
 
   Future<void> getMOTD() async {
@@ -99,45 +96,6 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       dailyMessage = data.get("motd");
     });
-  }
-
-  Future<void> updateMOTD(String newMessage) async {
-    // set up map for data to be inputted into Message Of The Day Document
-    final newEntry = <String, String>{
-      "motd": newMessage,
-    };
-    // edit Message of the Day Document with new Message of the Day
-    await messageDB.doc("Message of the Day").set(newEntry);
-    // update Message of the Day in the app screen
-    getMOTD();
-  }
-
-  Future<void> _updateMOTDDialogue() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Input MOTD"),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter a new Message of the Day'
-                  ),
-                  onSubmitted: (String text) async {
-                    updateMOTD(text);
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          ),
-        );
-      }
-    );
   }
 }
 
@@ -162,6 +120,13 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _themeMode = newMode;
     });
+  }
+
+  void rebuildApp() {
+    final temp = _themeMode;
+    changeTheme(ThemeMode.light);
+    changeTheme(ThemeMode.dark);
+    changeTheme(temp);
   }
 
   @override
@@ -310,8 +275,8 @@ class _HealthyHabitsScreen extends State<HealthyHabitsScreen> {
 class HamburgerDir extends StatelessWidget {
 
   // method for flutter data binding taken from: https://medium.com/flutter-community/data-binding-in-flutter-or-passing-data-from-a-child-widget-to-a-parent-widget-4b1c5ffe2114
-  final Callback onCorrectAdminLogin;
-  HamburgerDir({required this.onCorrectAdminLogin});
+  // final Callback onCorrectAdminLogin;
+  // HamburgerDir({required this.onCorrectAdminLogin});
 
   final adminDB = FirebaseFirestore.instance.collection('Admin');
 
@@ -363,10 +328,10 @@ class HamburgerDir extends StatelessWidget {
                       return SleepVideosPage(title: 'videos', key: Key("videos"));
                     }));
           }),
-          ListTile(title: Text('Update MOTD', style: Theme.of(context).textTheme.button),
+          /* ListTile(title: Text('Update MOTD', style: Theme.of(context).textTheme.button),
               onTap: (){
             LoginBox(context);
-            }),
+            }), */
           ListTile(title: Text('Daily Diary', style: Theme.of(context).textTheme.button),
               onTap: (){
                 Navigator.of(context).push(
@@ -393,77 +358,4 @@ class HamburgerDir extends StatelessWidget {
       builder: (context) => page,
     ));
   }
-
-  Future<void> LoginBox(BuildContext context) async {
-    TextEditingController username = TextEditingController();
-    TextEditingController password = TextEditingController();
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Log In:'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  child: TextField(
-                    controller: username,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Username',
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  child: TextField(
-                    controller: password,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            ElevatedButton(
-              child: const Text('Sign In'),
-              onPressed: () async {
-                bool pass = await checkAdminPassword(username.value.text, password.value.text);
-                Navigator.of(context).pop(false);
-                if (pass){
-                  onCorrectAdminLogin();
-                }
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  // method to check password taken from https://stackoverflow.com/questions/56186457/how-to-hash-value-in-flutter-using-sha256
-  Future<bool> checkAdminPassword(String username, String password) async {
-    var saltValue = username.length > 0 ? username : '';
-    // utf8 representation of string
-    //print(password + saltValue);
-    var localSaltedPasswordBytes = utf8.encode(password + saltValue);
-    // hashed string
-    var localSaltedPasswordDigest = sha256.convert(localSaltedPasswordBytes);
-    //print(localSaltedPasswordDigest);
-    // hashed password in database
-    var data = await adminDB.doc("Account").get();
-    var databasePassword = data.get("password");
-    //print(databasePassword);
-    if (localSaltedPasswordDigest.toString() == databasePassword) {
-      return true;
-    }
-    return false;
-  }
-
 }
