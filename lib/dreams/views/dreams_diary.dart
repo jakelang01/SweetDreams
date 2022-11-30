@@ -21,6 +21,7 @@ class _DiaryScreen extends State<DiaryScreen> {
 
   //text controllers
   TextEditingController dailyEntry = TextEditingController();
+  TextEditingController mealEntry = TextEditingController();
 
   int dailyCaf = 0;
   //late int localCaf;
@@ -30,17 +31,6 @@ class _DiaryScreen extends State<DiaryScreen> {
     //localCaf = widget.caffKey;
     super.initState();
   }
-
-  /*final CaffCallback onChanged;
-  _DiaryScreen({required this.onChanged});
-  onChanged: (int updCaff){
-  updateCaff(updCaff)
-  }
-  void updateCaff(int up){
-    setState(() {
-      up = dailyCaf;
-    });
-  }*/
 
   void calcCaff(String dropValue){
     switch(dropValue){
@@ -75,7 +65,7 @@ class _DiaryScreen extends State<DiaryScreen> {
         title: Text("Daily Diary"),
         actions: <Widget>[],
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Column(
         children: <Widget>[
           const Padding(
@@ -89,7 +79,7 @@ class _DiaryScreen extends State<DiaryScreen> {
               ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             child: TextFormField(
               controller: dailyEntry,
               decoration: const InputDecoration(
@@ -98,22 +88,29 @@ class _DiaryScreen extends State<DiaryScreen> {
               ),
             ),
           ),
+          Divider(
+            height: 20,
+            thickness: 2,
+            indent: 0,
+            endIndent: 0,
+            color: Theme.of(context).dividerColor,
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            padding: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 4),
             child: Text(
               'What kind of caffeine did you consume?',
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               textScaleFactor: 1,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.headline2,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            padding: const EdgeInsets.only(top: 4, bottom: 8),
             child: CaffeineMenu(),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   primary: Colors.deepPurple
@@ -128,14 +125,41 @@ class _DiaryScreen extends State<DiaryScreen> {
             ),
           ),
           Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 8),
+            child: Text(
+              'Total Caffeine Today: $dailyCaf\mg',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              textScaleFactor: 1,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            )
+          ),
+          Divider(
+            height: 20,
+            thickness: 2,
+            indent: 0,
+            endIndent: 0,
+            color: Theme.of(context).dividerColor,
+          ),
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: Text(
-              'Total Caffeine Today: $dailyCaf',
+              'What did you eat today?',
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               textScaleFactor: 1.5,
               style: const TextStyle(fontWeight: FontWeight.bold),
             )
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: TextFormField(
+              controller: mealEntry,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Tell us here!",
+              ),
+            ),
           )
         ],
       ),
