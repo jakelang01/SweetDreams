@@ -98,16 +98,6 @@ class _OutputScreen extends State<OutputScreen> {
               ),
             ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: Text(
-                      '$nightNumber Quality: $quality1, Bedtime: $bedTime1, WakeUp: $wakeUp1, TotalSleep: $totalSleep1, Description: $description1',
-                      textAlign: TextAlign.center,
-                      //overflow: TextOverflow.ellipsis,
-                      textScaleFactor: 0.9,
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                  ),
-                  Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                       child:ElevatedButton(
                         child: Text('Submit'),
@@ -116,6 +106,16 @@ class _OutputScreen extends State<OutputScreen> {
                           setData(nightNumber);
                         },
                       )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: Text(
+                      '$nightNumber' + '\nQuality: $quality1' + '\nBedtime: $bedTime1' + '\nWakeUp: $wakeUp1' + '\nTotalSleep: $totalSleep1' + '\nDescription: $description1',
+                      textAlign: TextAlign.center,
+                      //overflow: TextOverflow.ellipsis,
+                      textScaleFactor: 0.9,
+                      style: Theme.of(context).textTheme.headline2,
+                    ),
                   ),
                 ]
         )
