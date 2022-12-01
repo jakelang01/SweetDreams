@@ -79,9 +79,8 @@ class _OutputScreen extends State<OutputScreen> {
         appBar: AppBar(
           title: Text('See Previous Night\'s Sleep Data'),
           centerTitle: true,
-          backgroundColor: Colors.deepPurple,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Column(
                 children:<Widget>[
             Padding(
@@ -111,9 +110,6 @@ class _OutputScreen extends State<OutputScreen> {
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                       child:ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.deepPurple
-                        ),
                         child: Text('Submit'),
                         onPressed: () {
                           nightNumber = "Night" + userInput.text;
