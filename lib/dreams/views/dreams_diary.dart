@@ -66,7 +66,10 @@ class _DiaryScreen extends State<DiaryScreen> {
         actions: <Widget>[],
       ),
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Column(
+      body: Container(
+        margin: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 30.0),
+        color: Theme.of(context).canvasColor,
+        child: ListView(
         children: <Widget>[
           const Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
@@ -112,9 +115,6 @@ class _DiaryScreen extends State<DiaryScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple
-              ),
               child: Text('Confirm'),
               onPressed: () {
                 calcCaff(caffDrop);
@@ -172,6 +172,7 @@ class _DiaryScreen extends State<DiaryScreen> {
           ),
         ],
       ),
+    ),
     );
   }
 
@@ -197,10 +198,10 @@ class _CaffeineMenu extends State<CaffeineMenu> {
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
+      style: Theme.of(context).textTheme.button,
       underline: Container(
         height: 2,
-        color: Colors.deepPurpleAccent,
+        color: Theme.of(context).canvasColor,
       ),
       onChanged: (String? value) {
         // This is called when the user selects an item.

@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 
   static _MyHomePageState of(BuildContext context) =>
-      context.findAncestorStateOfType<_MyHomePageState>()!;
+      context.findAncestorStateOfType<_MyHomePageState>()! ?? _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -101,6 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> getMOTD() async {
+    print("called");
     DocumentSnapshot data =  await messageDB.doc("Message of the Day").get();
     setState(() {
       dailyMessage = data.get("motd");

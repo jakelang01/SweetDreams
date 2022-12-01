@@ -135,12 +135,12 @@ class _SettingsPageState extends State<SettingsPage> {
     // edit Message of the Day Document with new Message of the Day
     await adminDB.doc("Message of the Day").set(newEntry);
     // update Message of the Day in the app screen
-    MyHomePage.of(context).getMOTD();
-    MyApp.of(context).rebuildApp();
   }
 
-  void callbackToUpdateMOTD() {
-    _updateMOTDDialogue();
+  Future<void> callbackToUpdateMOTD() async {
+    await _updateMOTDDialogue();
+    MyHomePage.of(context).getMOTD();
+    MyApp.of(context).rebuildApp();
   }
 
   Future<void> _updateMOTDDialogue() async {
