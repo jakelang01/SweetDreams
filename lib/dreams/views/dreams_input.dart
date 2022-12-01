@@ -133,17 +133,7 @@ class _InputScreen extends State<InputScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: Container(
                 alignment: Alignment.center,
-                child: RatingBarIndicator(
-                  rating: _userRating,
-                  itemBuilder: (context, index) => Icon(
-                    _selectedIcon ?? Icons.star,
-                    color: Colors.amber,
-                  ),
-                  itemCount: 5,
-                  itemSize: 50.0,
-                  unratedColor: Colors.amber.withAlpha(50),
-                  direction: _isVertical ? Axis.vertical : Axis.horizontal,
-                ),
+                child: _ratingBar(),
               ),
             ),
             Padding(
@@ -275,6 +265,7 @@ class _InputScreen extends State<InputScreen> {
       onRatingUpdate: (rating) {
         setState(() {
           _rating = rating;
+          print(_rating);
         });
       },
       updateOnDrag: true,
