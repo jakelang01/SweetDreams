@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 
   static _MyHomePageState of(BuildContext context) =>
-      context.findAncestorStateOfType<_MyHomePageState>()! ?? _MyHomePageState();
+      context.findAncestorStateOfType<_MyHomePageState>()!;
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -368,6 +368,7 @@ class HamburgerDir extends StatelessWidget {
   Future<dynamic> _navPush(BuildContext context, Widget page) {
     return Navigator.push(context, MaterialPageRoute(
       builder: (context) => page,
-    ));
+    ));    MyHomePage.of(context).getMOTD();
+    MyApp.of(context).rebuildApp();
   }
 }

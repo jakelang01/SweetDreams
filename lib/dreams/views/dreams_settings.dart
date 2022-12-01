@@ -139,8 +139,11 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> callbackToUpdateMOTD() async {
     await _updateMOTDDialogue();
-    MyHomePage.of(context).getMOTD();
-    MyApp.of(context).rebuildApp();
+    if (mounted)
+    {
+      MyHomePage.of(context).getMOTD();
+    }
+//    MyApp.of(context).changeTheme(ThemeMode.light);
   }
 
   Future<void> _updateMOTDDialogue() async {

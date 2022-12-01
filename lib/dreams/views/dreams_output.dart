@@ -7,11 +7,11 @@ import '../presenter/dreams_presenter.dart';
 List<String> list = <String>['Night1', 'Night2', 'Night3', 'Night4'];
 String _dropdownValue1 = list.first;
 String _dropdownValue2 = list.last;
-String bedTime1 = 'no value';
-String description1 = 'empty';
-int quality1 = 0;
-String totalSleep1 = 'nothing';
-String wakeUp1 = 'something';
+//String bedTime1 = 'no value';
+//String description1 = 'empty';
+//int quality1 = 0;
+//String totalSleep1 = 'nothing';
+//String wakeUp1 = 'something';
 final databaseReference = FirebaseFirestore.instance.collection("Example User");
 
 class OutputScreen extends StatefulWidget {
@@ -21,40 +21,51 @@ class OutputScreen extends StatefulWidget {
 
 class _OutputScreen extends State<OutputScreen> {
 
+  String bedTime1 = 'no value';
+  String description1 = 'empty';
+  int quality1 = 0;
+  String totalSleep1 = 'nothing';
+  String wakeUp1 = 'something';
+  String nightNumber = "Night0";
+
   RecordNewNight night = new RecordNewNight();
   TextEditingController userInput = TextEditingController();
 
-  void setData(String number) {
-    getTheBedTime(number);
-    getTheDescription(number);
-    getTheQuality(number);
-    getTheTotalSleep(number);
-    getTheWakeUp(number);
+  Future<void> setData(String number) async {
+    var bedtime = await getTheBedTime(number);
+    var description = await getTheDescription(number);
+    var quality = await getTheQuality(number);
+    var totalSleep = await getTheTotalSleep(number);
+    var wakeUp = await getTheWakeUp(number);
+
+    setState(() {
+      nightNumber = number;
+      bedTime1 = bedtime;
+      description1 = description;
+      quality1 = quality;
+      totalSleep1 = totalSleep;
+      wakeUp1 = wakeUp;
+    });
   }
 
-  void getTheBedTime(String nightNumber) async {
-    Future<String> bedFuture = night.getBedtime(nightNumber);
-    bedTime1 = await bedFuture;
+  Future<String> getTheBedTime(String nightNumber) async {
+    return night.getBedtime(nightNumber);
   }
 
-  void getTheDescription(String nightNumber) async {
-    Future<String> bedFuture = night.getDescription(nightNumber);
-    description1 = await bedFuture;
+  Future<String> getTheDescription(String nightNumber) async {
+    return night.getDescription(nightNumber);
   }
 
-  void getTheQuality(String nightNumber) async {
-    Future<int> bedFuture = night.getQuality(nightNumber);
-    quality1 = await bedFuture;
+  Future<int> getTheQuality(String nightNumber) async {
+    return night.getQuality(nightNumber);
   }
 
-  void getTheTotalSleep(String nightNumber) async {
-    Future<String> bedFuture = night.getTotalSleep(nightNumber);
-    totalSleep1 = await bedFuture;
+  Future<String> getTheTotalSleep(String nightNumber) async {
+    return night.getTotalSleep(nightNumber);
   }
 
-  void getTheWakeUp(String nightNumber) async {
-    Future<String> bedFuture = night.getWakeUp(nightNumber);
-    wakeUp1 = await bedFuture;
+  Future<String> getTheWakeUp(String nightNumber) async {
+    return night.getWakeUp(nightNumber);
   }
 
   @override
@@ -89,9 +100,10 @@ class _OutputScreen extends State<OutputScreen> {
             ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    child: Text("Night" + userInput.text + " " + quality1.toString() + " " + bedTime1,
+                    child: Text(
+                      '$nightNumber Quality: $quality1, Bedtime: $bedTime1, WakeUp: $wakeUp1, TotalSleep: $totalSleep1, Description: $description1',
                       textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
+                      //overflow: TextOverflow.ellipsis,
                       textScaleFactor: 0.9,
                       style: Theme.of(context).textTheme.headline2,
                     ),
@@ -103,7 +115,10 @@ class _OutputScreen extends State<OutputScreen> {
                             primary: Colors.deepPurple
                         ),
                         child: Text('Submit'),
-                        onPressed: () => getTheBedTime("Night" + userInput.text)
+                        onPressed: () {
+                          nightNumber = "Night" + userInput.text;
+                          setData(nightNumber);
+                        },
                       )
                   ),
                 ]
