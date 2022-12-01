@@ -89,7 +89,7 @@ class _SleepVideosPageState extends State<SleepVideosPage> {
           centerTitle: true,
           backgroundColor: Theme.of(context).colorScheme.primary
         ),
-        //backgroundColor: Theme.of(context).backgroundColor, // this breaks everything for some reason
+        backgroundColor: Theme.of(context).canvasColor, // this breaks everything for some reason
         body: ListView(
           children: <Widget>[
             createPlayer(controller1, header1),
